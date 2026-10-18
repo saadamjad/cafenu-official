@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap, useGSAP, prefersReducedMotion } from "@/lib/gsap";
 import { formatPrice, menu } from "@/content/menu";
+import { ChevronIcon } from "@/components/Icons";
 
 const groups = [
   { label: "Food", items: menu.filter((c) => c.kind === "food") },
@@ -13,6 +14,24 @@ export function MenuBoard() {
   const root = useRef<HTMLElement>(null);
   const pills = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(menu[0].id);
+  const [edges, setEdges] = useState({ left: false, right: false });
+
+  // show the left/right arrows only when there is more to scroll that way
+  useEffect(() => {
+    const bar = pills.current;
+    if (!bar) return;
+    const update = () =>
+      setEdges({ left: bar.scrollLeft > 4, right: bar.scrollLeft + bar.clientWidth < bar.scrollWidth - 4 });
+    update();
+    bar.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      bar.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+
+  const nudge = (dir: number) => pills.current?.scrollBy({ left: dir * pills.current.clientWidth * 0.7, behavior: "smooth" });
 
   useEffect(() => {
     const io = new IntersectionObserver(
@@ -66,20 +85,41 @@ export function MenuBoard() {
           </a>
         </div>
 
-        <nav aria-label="Menu categories" className="menu-pills sticky top-0 z-30 -mx-5 mt-12 bg-cream/90 px-5 py-3 backdrop-blur-md md:-mx-8 md:mt-16 md:px-8">
-          <div ref={pills} className="relative flex items-center gap-1.5 overflow-x-auto [scrollbar-width:none]">
+        <nav aria-label="Menu categories" className="menu-pills sticky top-0 z-30 -mx-5 mt-12 bg-cream/90 px-3 py-3 backdrop-blur-md md:-mx-8 md:mt-16 md:px-8">
+          <div className="relative rounded-full border border-ink/15 bg-paper p-1.5 shadow-[0_12px_30px_-18px_rgba(0,0,0,0.45)]">
+          {(["left", "right"] as const).map((side) => (
+            <button
+              key={side}
+              type="button"
+              onClick={() => nudge(side === "left" ? -1 : 1)}
+              aria-label={side === "left" ? "Scroll categories left" : "Scroll categories right"}
+              tabIndex={-1}
+              className={`absolute top-1/2 z-20 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-ink text-cream shadow-lg transition-opacity duration-300 hover:bg-coal ${
+                side === "left" ? "left-1.5" : "right-1.5"
+              } ${edges[side] ? "opacity-100" : "pointer-events-none opacity-0"}`}
+            >
+              <ChevronIcon className={`h-5 w-5 ${side === "left" ? "rotate-180" : ""}`} />
+            </button>
+          ))}
+          <div
+            ref={pills}
+            className="relative flex items-center gap-1.5 overflow-x-auto overscroll-x-contain scroll-px-12 px-1 [scrollbar-width:none]"
+            style={{
+              maskImage: `linear-gradient(to right, ${edges.left ? "transparent 0, #000 3.5rem" : "#000 0"}, ${edges.right ? "#000 calc(100% - 3.5rem), transparent 100%" : "#000 100%"})`,
+            }}
+          >
             <span data-indicator aria-hidden="true" className="absolute left-0 top-0 h-full rounded-full bg-ink" style={{ width: 0 }} />
             {groups.map((g, gi) => (
               <div key={g.label} className="flex items-center gap-1.5">
-                <span className={`label shrink-0 pr-1 ${gi > 0 ? "ml-3 border-l border-line pl-4" : ""}`}>{g.label}</span>
+                <span className={`label shrink-0 pl-3 pr-1 !text-gold-deep ${gi > 0 ? "ml-2 border-l border-line pl-4" : ""}`}>{g.label}</span>
                 {g.items.map((c) => (
                   <a
                     key={c.id}
                     href={`#menu-${c.id}`}
                     data-pill={c.id}
                     aria-current={active === c.id ? "true" : undefined}
-                    className={`relative z-10 inline-flex min-h-11 items-center whitespace-nowrap rounded-full px-4 text-sm font-medium transition-colors focus-visible:rounded-full! ${
-                      active === c.id ? "text-cream" : "text-ink/75 hover:bg-ink/5 hover:text-ink"
+                    className={`relative z-10 inline-flex min-h-11 items-center whitespace-nowrap rounded-full px-4 text-[0.95rem] font-medium transition-colors focus-visible:rounded-full! ${
+                      active === c.id ? "text-cream" : "text-ink hover:bg-ink/5"
                     }`}
                   >
                     {c.title}
@@ -87,6 +127,7 @@ export function MenuBoard() {
                 ))}
               </div>
             ))}
+          </div>
           </div>
         </nav>
 
