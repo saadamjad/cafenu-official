@@ -1,10 +1,10 @@
-import { site } from "@/content/site";
+import { sameAs, site } from "@/content/site";
 import { MagneticButton } from "@/components/MagneticButton";
+import { SocialLinks } from "@/components/SocialLinks";
 
 // Renders only details that exist in site.ts. Empty TODOs never show fake data.
 export function Visit() {
   const a = site.address;
-  const socials = Object.entries(site.socials).filter(([, v]) => v) as [string, string][];
 
   return (
     <section id="visit" aria-labelledby="visit-title" className="relative overflow-hidden bg-teal py-28 text-cream">
@@ -72,17 +72,13 @@ export function Visit() {
               </dd>
             </div>
           )}
-          {socials.length > 0 && (
-            <div>
-              <dt className="text-xs font-semibold uppercase tracking-[0.25em] text-cream/90">Follow</dt>
-              <dd className="mt-3 flex flex-wrap gap-4 text-lg capitalize">
-                {socials.map(([k, v]) => (
-                  <a key={k} href={v} rel="noopener" target="_blank" className="underline-offset-4 hover:underline">
-                    {k}
-                  </a>
-                ))}
-              </dd>
-            </div>
+          {sameAs.length > 0 && (
+          <div className="sm:col-span-2">
+            <dt className="text-xs font-semibold uppercase tracking-[0.25em] text-cream/90">Follow Cafe Nu</dt>
+            <dd className="mt-4">
+              <SocialLinks />
+            </dd>
+          </div>
           )}
         </dl>
       </div>

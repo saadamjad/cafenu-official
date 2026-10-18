@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { SocialLinks } from "@/components/SocialLinks";
 
 const links = [
   { href: "#about", label: "About" },
@@ -61,9 +62,12 @@ export function Nav() {
             ))}
           </ul>
         </nav>
-        <a href="#menu" className="hidden rounded-full bg-mustard px-5 py-3 text-sm font-semibold text-espresso lg:inline-flex">
-          View menu
-        </a>
+        <div className="hidden items-center gap-3 lg:flex">
+          <SocialLinks variant="icon" className="gap-2" />
+          <a href="#menu" className="rounded-full bg-mustard px-5 py-3 text-sm font-semibold text-espresso">
+            View menu
+          </a>
+        </div>
         <button
           type="button"
           className="grid h-12 w-12 place-items-center rounded-full lg:hidden"
@@ -97,6 +101,7 @@ export function Nav() {
             </li>
           ))}
         </ul>
+        <SocialLinks className="px-4 pb-8" />
       </nav>
     </header>
   );

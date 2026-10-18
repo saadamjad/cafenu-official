@@ -28,9 +28,9 @@ export const site = {
   mapsUrl: null as string | null, // Google Maps share link
   hours: [] as OpeningHours[], // e.g. [{ days: "Mon – Sun", dayCodes: ["Monday", ...], opens: "08:00", closes: "23:00" }]
   socials: {
-    instagram: null as string | null,
+    instagram: null as string | null, // TODO: e.g. "https://www.instagram.com/<handle>/"
     tiktok: null as string | null,
-    facebook: null as string | null,
+    facebook: null as string | null, // TODO: e.g. "https://www.facebook.com/<page>"
   },
 };
 

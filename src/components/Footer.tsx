@@ -1,4 +1,5 @@
 import { site } from "@/content/site";
+import { SocialLinks } from "@/components/SocialLinks";
 
 async function Year() {
   "use cache";
@@ -15,6 +16,7 @@ export function Footer() {
             Cafe <span className="italic text-mustard">Nu</span>
           </p>
           <p className="mt-3 text-cream/70">{site.tagline}</p>
+          <SocialLinks variant="icon" className="mt-6" />
         </div>
         <nav aria-label="Footer">
           <ul className="grid grid-cols-2 gap-x-10 gap-y-3 text-cream/80">
