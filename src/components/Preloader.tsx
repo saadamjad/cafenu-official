@@ -1,26 +1,13 @@
-// CSS-only intro: draws the wordmark, then wipes up. Never blocks content without JS.
+/* eslint-disable @next/next/no-img-element -- tiny local logo; must paint before JS */
+// CSS-only intro: the logo settles into focus while a gold ring draws around it, then the curtain lifts.
 export function Preloader() {
   return (
     <div className="preloader" aria-hidden="true">
-      <div className="flex flex-col items-center gap-6">
-        <svg className="preloader__bean h-12 w-12" viewBox="0 0 64 64">
-          <ellipse cx="32" cy="32" rx="14" ry="20" fill="#d9b98c" />
-          <path d="M32 12c-6 7 6 13 0 20s6 13 0 20" fill="none" stroke="#1a1411" strokeWidth="3" strokeLinecap="round" />
+      <div className="relative grid h-48 w-48 place-items-center">
+        <svg className="absolute inset-0 h-full w-full -rotate-90" viewBox="0 0 200 200">
+          <circle className="preloader__ring" cx="100" cy="100" r="96" fill="none" stroke="#cfaa76" strokeWidth="1.5" pathLength="1000" />
         </svg>
-        <svg className="preloader__word w-64" viewBox="0 0 320 80">
-          <text
-            x="160"
-            y="58"
-            textAnchor="middle"
-            fontFamily="Georgia, serif"
-            fontSize="62"
-            fill="none"
-            stroke="#f7f1e8"
-            strokeWidth="1.4"
-          >
-            Cafe Nu
-          </text>
-        </svg>
+        <img src="/images/cafe-nu-logo.png" alt="" width={160} height={160} className="preloader__logo h-40 w-40" />
       </div>
     </div>
   );

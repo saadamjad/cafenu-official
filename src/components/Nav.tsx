@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { SocialLinks } from "@/components/SocialLinks";
 
@@ -41,15 +42,25 @@ export function Nav() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-transform duration-500 ${hidden && !open ? "-translate-y-full" : ""}`}
+      className={`fixed inset-x-0 top-0 z-50 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${hidden && !open ? "-translate-y-full" : ""}`}
     >
       <div
         className={`mx-auto flex h-[72px] max-w-7xl items-center justify-between px-4 transition-colors duration-500 sm:px-8 ${
-          solid || open ? "bg-espresso-deep/85 backdrop-blur-md" : ""
+          solid || open ? "bg-coal/80 shadow-[0_1px_0_rgb(207_170_118/0.15)] backdrop-blur-xl" : ""
         } text-cream`}
       >
-        <a href="#top" className="font-display text-2xl font-semibold tracking-tight" aria-label="Cafe Nu home">
-          Cafe <span className="italic text-mustard">Nu</span>
+        <a href="#top" className="group flex items-center gap-3" aria-label="Cafe Nu home">
+          <Image
+            src="/images/cafe-nu-logo.png"
+            alt=""
+            width={44}
+            height={44}
+            priority
+            className="h-11 w-11 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:rotate-[20deg]"
+          />
+          <span className="font-display text-2xl font-medium tracking-tight">
+            Cafe <span className="italic text-gold">Nu</span>
+          </span>
         </a>
         <nav aria-label="Main" className="hidden lg:block">
           <ul className="flex items-center gap-1">
@@ -64,7 +75,7 @@ export function Nav() {
         </nav>
         <div className="hidden items-center gap-3 lg:flex">
           <SocialLinks variant="icon" className="gap-2" />
-          <a href="#menu" className="rounded-full bg-mustard px-5 py-3 text-sm font-semibold text-espresso">
+          <a href="#menu" className="rounded-full bg-gold px-5 py-3 text-sm font-semibold text-ink">
             View menu
           </a>
         </div>
@@ -83,14 +94,14 @@ export function Nav() {
         </button>
       </div>
       <div
-        className="absolute left-0 top-0 h-[2px] bg-mustard"
+        className="absolute left-0 top-0 h-[2px] bg-gold"
         style={{ width: `${progress * 100}%` }}
         aria-hidden="true"
       />
       <nav
         id="mobile-nav"
         aria-label="Mobile"
-        className={`overflow-hidden bg-espresso-deep/95 text-cream backdrop-blur-md transition-[max-height] duration-500 lg:hidden ${open ? "max-h-[80vh]" : "max-h-0"}`}
+        className={`overflow-hidden bg-coal/95 text-cream backdrop-blur-md transition-[max-height] duration-500 lg:hidden ${open ? "max-h-[80vh]" : "max-h-0"}`}
       >
         <ul className="flex flex-col px-4 pb-6">
           {links.map((l) => (

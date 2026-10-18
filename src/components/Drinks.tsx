@@ -9,13 +9,13 @@ const pick = (cat: string, name: string) => {
 };
 
 const drinks = [
-  { ...pick("hot-coffee", "Cafe Nu Special Espresso"), color: "#2b211c" },
+  { ...pick("hot-coffee", "Cafe Nu Special Espresso"), color: "#1f1f1f" },
   { ...pick("hot-coffee", "Spanish Latte"), color: "#b9844f" },
   { ...pick("iced-coffee", "Caramel Iced Latte"), color: "#c98d3e" },
   { ...pick("iced-matcha", "Iced Matcha"), color: "#8fae5a" },
   { ...pick("iced-matcha", "Strawberry Iced Matcha"), color: "#d9707e" },
-  { ...pick("iced-matcha", "Popcorn Iced Matcha"), color: "#e2b33c" },
-  { ...pick("frappe", "Brownie Frappé"), color: "#5a3a26" },
+  { ...pick("iced-matcha", "Popcorn Iced Matcha"), color: "#cfaa76" },
+  { ...pick("frappe", "Brownie Frappé"), color: "#4a3a2a" },
   { ...pick("mocktails", "Nu Azure"), color: "#2f7a82" },
 ];
 
@@ -37,15 +37,15 @@ function Card({ d }: { d: (typeof drinks)[number] }) {
             </svg>
           </span>
           <span className="relative text-xs font-semibold uppercase tracking-[0.25em] text-muted">{d.category}</span>
-          <span className="font-display relative text-3xl font-semibold leading-tight text-espresso">{d.name}</span>
+          <span className="font-display relative text-3xl font-medium leading-tight text-ink">{d.name}</span>
         </span>
         <span className="flip__face flip__back flex flex-col justify-between rounded-3xl p-6 text-cream shadow-lg" style={{ background: d.color }}>
           <span className="text-xs font-semibold uppercase tracking-[0.25em] opacity-80">{d.category}</span>
           <span>
-            <span className="font-display block text-2xl font-semibold">{d.name}</span>
+            <span className="font-display block text-2xl font-medium">{d.name}</span>
             {d.note && <span className="mt-2 block text-sm opacity-85">{d.note}</span>}
           </span>
-          <span className="font-display text-4xl font-semibold">{formatPrice(d.price)}</span>
+          <span className="font-display text-4xl font-medium">{formatPrice(d.price)}</span>
         </span>
       </button>
     </li>
@@ -72,10 +72,10 @@ export function Drinks() {
   );
 
   return (
-    <section id="drinks" ref={root} aria-labelledby="drinks-title" className="relative overflow-hidden bg-latte/40 py-28">
+    <section id="drinks" ref={root} aria-labelledby="drinks-title" className="relative overflow-hidden bg-[#efe6d6] py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-8">
-        <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-teal">The bar</p>
-        <h2 id="drinks-title" className="font-display max-w-3xl text-[clamp(2.4rem,5vw,4.2rem)] font-semibold leading-[0.95] text-espresso">
+        <p className="eyebrow mb-5">The bar</p>
+        <h2 id="drinks-title" className="font-display max-w-3xl text-[clamp(2.4rem,5vw,4.2rem)] font-medium leading-[0.95] text-ink">
           Espresso, iced matcha &amp; frappés
         </h2>
         <p className="mt-4 max-w-xl text-lg text-muted">
@@ -87,7 +87,7 @@ export function Drinks() {
           ))}
         </ul>
         <p className="mt-10">
-          <a href="#menu-hot-coffee" className="font-semibold text-teal underline decoration-2 underline-offset-4">
+          <a href="#menu-hot-coffee" className="font-semibold text-gold-deep underline decoration-2 underline-offset-4">
             See every coffee, tea and mocktail on the menu
           </a>
         </p>

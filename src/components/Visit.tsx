@@ -7,23 +7,23 @@ export function Visit() {
   const a = site.address;
 
   return (
-    <section id="visit" aria-labelledby="visit-title" className="relative overflow-hidden bg-teal py-28 text-cream">
+    <section id="visit" aria-labelledby="visit-title" className="relative overflow-hidden bg-gold py-28 text-ink">
       <div className="mx-auto grid max-w-7xl gap-16 px-4 sm:px-8 lg:grid-cols-2">
         <div>
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-cream/90">Visit</p>
-          <h2 id="visit-title" className="font-display text-[clamp(2.8rem,7vw,6rem)] font-semibold leading-[0.9]">
-            Come for coffee, <em className="text-mustard">stay for brunch.</em>
+          <p className="eyebrow mb-5 !text-ink/80">Visit us</p>
+          <h2 id="visit-title" className="font-display text-[clamp(2.8rem,7vw,6rem)] font-medium leading-[0.9]">
+            Come for coffee, <em className="font-medium">stay for brunch.</em>
           </h2>
           <div className="mt-10 flex flex-wrap gap-4">
             {site.mapsUrl && (
-              <MagneticButton href={site.mapsUrl}>Get directions</MagneticButton>
+              <MagneticButton href={site.mapsUrl} variant="dark">Get directions</MagneticButton>
             )}
             {site.whatsapp && (
               <MagneticButton href={`https://wa.me/${site.whatsapp}`} variant="ghost">
                 WhatsApp us
               </MagneticButton>
             )}
-            <MagneticButton href="#menu" variant={site.mapsUrl ? "ghost" : "solid"}>
+            <MagneticButton href="#menu" variant={site.mapsUrl ? "ghost" : "dark"}>
               Browse the menu
             </MagneticButton>
           </div>
@@ -31,7 +31,7 @@ export function Visit() {
 
         <dl className="grid content-start gap-8 sm:grid-cols-2">
           <div>
-            <dt className="text-xs font-semibold uppercase tracking-[0.25em] text-cream/90">Address</dt>
+            <dt className="text-xs font-semibold uppercase tracking-[0.25em] text-ink">Address</dt>
             <dd className="mt-3 text-lg leading-relaxed">
               {a ? (
                 <address className="not-italic">
@@ -45,7 +45,7 @@ export function Visit() {
             </dd>
           </div>
           <div>
-            <dt className="text-xs font-semibold uppercase tracking-[0.25em] text-cream/90">Opening hours</dt>
+            <dt className="text-xs font-semibold uppercase tracking-[0.25em] text-ink">Opening hours</dt>
             <dd className="mt-3 text-lg">
               {site.hours.length ? (
                 <ul className="space-y-1">
@@ -65,7 +65,7 @@ export function Visit() {
           </div>
           {(site.phone || site.email) && (
             <div>
-              <dt className="text-xs font-semibold uppercase tracking-[0.25em] text-cream/90">Contact</dt>
+              <dt className="text-xs font-semibold uppercase tracking-[0.25em] text-ink">Contact</dt>
               <dd className="mt-3 space-y-1 text-lg">
                 {site.phone && <a className="block underline-offset-4 hover:underline" href={`tel:${site.phone}`}>{site.phone}</a>}
                 {site.email && <a className="block underline-offset-4 hover:underline" href={`mailto:${site.email}`}>{site.email}</a>}
@@ -74,7 +74,7 @@ export function Visit() {
           )}
           {sameAs.length > 0 && (
           <div className="sm:col-span-2">
-            <dt className="text-xs font-semibold uppercase tracking-[0.25em] text-cream/90">Follow Cafe Nu</dt>
+            <dt className="text-xs font-semibold uppercase tracking-[0.25em] text-ink">Follow Cafe Nu</dt>
             <dd className="mt-4">
               <SocialLinks />
             </dd>

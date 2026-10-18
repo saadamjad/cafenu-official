@@ -14,16 +14,21 @@ export function About() {
       const mm = gsap.matchMedia();
       mm.add("(min-width: 1024px)", () => {
         const tl = gsap.timeline({
-          scrollTrigger: { trigger: root.current, start: "top top", end: "+=140%", scrub: 1, pin: true },
+          scrollTrigger: { trigger: root.current, start: "top top", end: "+=140%", scrub: 1.4, pin: true },
         });
         tl.fromTo("[data-layer=back]", { yPercent: 10, rotate: -6 }, { yPercent: -20, rotate: 4, ease: "none" }, 0)
           .fromTo("[data-layer=mid]", { yPercent: 30, rotateY: -25 }, { yPercent: -15, rotateY: 8, ease: "none" }, 0)
           .fromTo("[data-layer=front]", { yPercent: 70, rotateY: 30, rotateZ: 6 }, { yPercent: -30, rotateY: -10, rotateZ: -3, ease: "none" }, 0)
-          .fromTo(lines, { opacity: 0.25, y: 30 }, { opacity: 1, y: 0, stagger: 0.12, ease: "power2.out" }, 0);
+          .fromTo(lines, { opacity: 0.35, y: 30 }, { opacity: 1, y: 0, stagger: 0.12, ease: "power2.out" }, 0);
       });
       mm.add("(max-width: 1023px)", () => {
+        // phones: no pinning, but the three layers still drift at different depths
+        const st = { trigger: root.current, start: "top bottom", end: "bottom top", scrub: 1.2 };
+        gsap.fromTo("[data-layer=back]", { yPercent: 12, rotate: -5 }, { yPercent: -12, rotate: 3, ease: "none", scrollTrigger: st });
+        gsap.fromTo("[data-layer=mid]", { yPercent: 22, rotateY: -18 }, { yPercent: -10, rotateY: 6, ease: "none", scrollTrigger: st });
+        gsap.fromTo("[data-layer=front]", { yPercent: 40, rotateY: 22, rotateZ: 5 }, { yPercent: -18, rotateY: -8, rotateZ: -2, ease: "none", scrollTrigger: st });
         lines.forEach((l) =>
-          gsap.from(l, { opacity: 0, y: 30, duration: 0.9, scrollTrigger: { trigger: l, start: "top 88%" } }),
+          gsap.from(l, { opacity: 0, y: 36, duration: 1.2, ease: "expo.out", scrollTrigger: { trigger: l, start: "top 90%" } }),
         );
       });
     },
@@ -44,11 +49,11 @@ export function About() {
         </div>
 
         <div>
-          <p className="mb-5 text-xs font-semibold uppercase tracking-[0.3em] text-teal">About Cafe Nu</p>
-          <h2 id="about-title" className="font-display text-[clamp(2.6rem,5.5vw,4.6rem)] font-semibold leading-[0.95] text-espresso">
-            A modern cafe made for <em className="text-teal">slow mornings</em> and long lunches.
+          <p className="eyebrow mb-5">About Cafe Nu</p>
+          <h2 id="about-title" className="font-display text-[clamp(2.6rem,5.5vw,4.6rem)] font-medium leading-[1] tracking-[-0.01em] text-ink">
+            A modern cafe made for <em className="text-gold-deep">slow mornings</em> and long lunches.
           </h2>
-          <div className="mt-8 space-y-5 text-lg leading-relaxed text-muted">
+          <div className="mt-8 space-y-5 text-lg font-light leading-relaxed text-muted">
             <p data-line>
               Cafe Nu is a modern coffee cafe and restaurant. Our espresso bar pours everything from a straight doppio
               to Spanish lattes, iced matcha and frappés.

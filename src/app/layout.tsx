@@ -1,19 +1,27 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Great_Vibes, Outfit, Playfair_Display } from "next/font/google";
 import { buildMetadata } from "@/lib/seo";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { Cursor } from "@/components/Cursor";
 import "./globals.css";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
   display: "swap",
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const script = Great_Vibes({
+  variable: "--font-script",
   subsets: ["latin"],
+  weight: "400",
   display: "swap",
 });
 
@@ -22,12 +30,12 @@ export const metadata: Metadata = buildMetadata();
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#2b211c",
+  themeColor: "#1f1f1f",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${inter.variable}`}>
+    <html lang="en" className={`${playfair.variable} ${outfit.variable} ${script.variable}`}>
       <body>
         <a href="#main" className="skip-link">
           Skip to content

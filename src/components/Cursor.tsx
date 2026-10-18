@@ -31,7 +31,7 @@ export function Cursor() {
     <div
       ref={dot}
       aria-hidden="true"
-      className="pointer-events-none fixed left-0 top-0 z-[80] -ml-2 -mt-3 h-6 w-4 rounded-[50%] bg-mustard opacity-0 mix-blend-difference"
+      className="pointer-events-none fixed left-0 top-0 z-[80] -ml-2 -mt-3 h-6 w-4 rounded-[50%] bg-gold opacity-0 mix-blend-difference"
       style={{ rotate: "-30deg" }}
     />
   );

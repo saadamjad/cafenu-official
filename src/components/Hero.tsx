@@ -18,30 +18,30 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-espresso-deep pb-16 pt-28 text-cream"
+      className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-coal pb-16 pt-28 text-cream"
     >
       {/* warm radial glow + tile hint */}
-      <div className="absolute inset-0 -z-20 bg-[radial-gradient(ellipse_at_70%_45%,#5a3a26_0%,#2b211c_45%,#1a1411_80%)]" />
+      <div className="absolute inset-0 -z-20 bg-[radial-gradient(ellipse_at_72%_40%,#3b3227_0%,#1f1f1f_42%,#141414_80%)]" />
 
       <HeroStage>
         <div className="relative mx-auto grid w-full max-w-7xl items-center gap-12 px-4 sm:px-8 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="relative z-10">
-            <p className="fade-up mb-6 inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-latte" style={{ ["--d" as string]: "0.1s" }}>
-              <span className="h-px w-10 bg-latte" /> Specialty coffee · All-day kitchen
+            <p className="fade-up eyebrow eyebrow--light mb-4" style={{ ["--d" as string]: "0.1s" }}>
+              Specialty coffee &amp; all-day kitchen
             </p>
             <h1 className="font-display">
               <span className="sr-only">Cafe Nu: Modern Coffee Cafe &amp; Restaurant</span>
-              <span className="block text-[clamp(4rem,13vw,10rem)] font-semibold leading-[0.85] tracking-tight">
+              <span className="block text-[clamp(4.2rem,14vw,10.5rem)] font-medium leading-[0.86] tracking-[-0.02em]">
                 <Kinetic text="Cafe" />
-                <span className="italic text-mustard">
+                <span className="italic text-gold">
                   <Kinetic text="Nu." offset={4} />
                 </span>
               </span>
-              <span className="mt-6 block max-w-xl text-[clamp(1.4rem,3vw,2.2rem)] font-light leading-tight text-cream/90">
+              <span className="mt-6 block max-w-xl text-[clamp(1.35rem,3vw,2.1rem)] font-normal italic leading-tight text-cream/90">
                 <Kinetic text="Modern Coffee Cafe & Restaurant" offset={8} />
               </span>
             </h1>
-            <p className="fade-up mt-6 max-w-lg text-lg leading-relaxed text-cream/75" style={{ ["--d" as string]: "0.8s" }}>
+            <p className="fade-up mt-6 max-w-lg text-lg font-light leading-relaxed text-cream/70" style={{ ["--d" as string]: "0.8s" }}>
               Espresso and iced matcha, all-day breakfast, creamy pastas, club sandwiches and steaks, served at
               warm oak tables and teal velvet chairs.
             </p>
@@ -55,7 +55,7 @@ export function Hero() {
 
           {/* LCP image: always server-rendered, the 3D cup floats over it */}
           <div className="fade-up relative mx-auto w-full max-w-md" style={{ ["--d" as string]: "0.2s" }}>
-            <div data-hero-arch className="relative aspect-[4/5] overflow-hidden rounded-t-[999px] rounded-b-3xl border border-latte/30 shadow-2xl shadow-black/50">
+            <div data-hero-arch className="relative aspect-[4/5] overflow-hidden ring-logo rounded-t-[999px] rounded-b-3xl">
               <Image
                 src="/images/cafe-nu-all-day-breakfast-latte.jpg"
                 alt="Cafe Nu All Day Breakfast with fluffy eggs, halloumi and sausages beside a latte with latte art"
@@ -65,10 +65,13 @@ export function Hero() {
                 sizes="(min-width: 1024px) 28rem, 90vw"
                 className="object-cover object-[35%_50%]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-espresso-deep/70 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-coal/70 via-transparent to-transparent" />
             </div>
-            <p className="absolute -bottom-5 right-6 rounded-full bg-cream px-5 py-2 text-sm font-semibold text-espresso shadow-lg">
-              All-day breakfast · Rs 1,450
+            <div className="float-slow absolute -left-4 -top-4 h-24 w-24 sm:-left-8 sm:-top-6 sm:h-28 sm:w-28">
+              <Image src="/images/cafe-nu-logo.png" alt="Cafe Nu logo" fill sizes="7rem" className="drop-shadow-[0_12px_24px_rgba(0,0,0,0.5)]" />
+            </div>
+            <p className="absolute -bottom-5 right-6 rounded-full bg-cream px-5 py-2 text-sm font-medium text-ink shadow-lg">
+              All-day breakfast · <span className="font-semibold">Rs 1,450</span>
             </p>
           </div>
         </div>
@@ -76,7 +79,9 @@ export function Hero() {
 
       <a href="#about" className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-xs uppercase tracking-[0.3em] text-cream/60 sm:flex">
         Scroll
-        <span className="h-10 w-px animate-pulse bg-cream/50" />
+        <span className="relative h-12 w-px overflow-hidden bg-cream/20">
+          <span className="absolute inset-x-0 top-0 h-1/2 animate-[scrollcue_2s_cubic-bezier(0.65,0,0.35,1)_infinite] bg-gold" />
+        </span>
       </a>
     </section>
   );

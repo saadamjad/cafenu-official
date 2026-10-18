@@ -1,14 +1,23 @@
-// Generates favicon.ico, apple-icon.png and PWA icons from src/app/icon.svg.
-// Run: npm run icons
+// Generates favicon.ico, icon.png, apple-icon.png and PWA icons from the Cafe Nu logo.
+// Run: npm run icons   (after npm run media has produced public/images/cafe-nu-logo.png)
 import sharp from "sharp";
-import { readFile, writeFile } from "node:fs/promises";
+import { writeFile, rm } from "node:fs/promises";
 
-const svg = await readFile("src/app/icon.svg");
-const png = (size, src = svg) => sharp(src, { density: 384 }).resize(size, size).png().toBuffer();
+const LOGO = "public/images/cafe-nu-logo.png";
+const BG = "#1f1f1f"; // logo charcoal
 
-// favicon.ico with 16/32/48 PNG entries (ICO supports embedded PNG)
+const round = (size) => sharp(LOGO).resize(size, size).png().toBuffer();
+// Full-bleed square on charcoal (for iOS / maskable), logo scaled into the safe zone
+const square = async (size, scale) => {
+  const inner = Math.round(size * scale);
+  return sharp({ create: { width: size, height: size, channels: 4, background: BG } })
+    .composite([{ input: await sharp(LOGO).resize(inner, inner).toBuffer(), gravity: "center" }])
+    .png()
+    .toBuffer();
+};
+
 const sizes = [16, 32, 48];
-const images = await Promise.all(sizes.map((s) => png(s)));
+const images = await Promise.all(sizes.map(round));
 const header = Buffer.alloc(6 + 16 * sizes.length);
 header.writeUInt16LE(0, 0);
 header.writeUInt16LE(1, 2);
@@ -25,19 +34,10 @@ sizes.forEach((s, i) => {
   offset += images[i].length;
 });
 await writeFile("src/app/favicon.ico", Buffer.concat([header, ...images]));
-
-// Apple touch icon: full-bleed square (iOS rounds corners itself)
-const fullBleed = Buffer.from(
-  svg.toString().replace('rx="16"', 'rx="0"'),
-);
-await writeFile("src/app/apple-icon.png", await png(180, fullBleed));
-
-// PWA icons
-await writeFile("public/icon-192.png", await png(192));
-await writeFile("public/icon-512.png", await png(512));
-// Maskable: bean shrunk into the 80% safe zone on a full-bleed background
-const maskable = Buffer.from(
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" fill="#2b211c"/><g transform="translate(32 32) scale(0.72) translate(-32 -32)"><g transform="rotate(-30 32 32)"><ellipse cx="32" cy="32" rx="13" ry="19" fill="#d9b98c"/><path d="M32 13c-6 7 6 13 0 19s6 13 0 19" fill="none" stroke="#2b211c" stroke-width="3" stroke-linecap="round"/></g></g></svg>`,
-);
-await writeFile("public/icon-maskable-512.png", await png(512, maskable));
+await writeFile("src/app/icon.png", await round(192));
+await rm("src/app/icon.svg", { force: true });
+await writeFile("src/app/apple-icon.png", await square(180, 0.92));
+await writeFile("public/icon-192.png", await round(192));
+await writeFile("public/icon-512.png", await sharp(LOGO).resize(512, 512).png().toBuffer());
+await writeFile("public/icon-maskable-512.png", await square(512, 0.8));
 console.log("icons generated");

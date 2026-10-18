@@ -9,7 +9,6 @@ const HeroScene = dynamic(() => import("@/components/three/HeroScene"), { ssr: f
 
 function canRender3D() {
   if (prefersReducedMotion()) return false;
-  if (!window.matchMedia("(min-width: 768px)").matches) return false;
   if ((navigator.hardwareConcurrency ?? 4) < 4) return false;
   // @ts-expect-error -- non-standard but widely supported
   if (navigator.connection?.saveData) return false;
@@ -25,11 +24,31 @@ export function HeroStage({ children }: { children: ReactNode }) {
   const root = useRef<HTMLDivElement>(null);
   const input = useRef<SceneInput>({ scroll: 0, px: 0, py: 0 });
   const [show3D, setShow3D] = useState(false);
+  const [compact, setCompact] = useState(false);
 
   useEffect(() => {
     if (!canRender3D()) return;
+    // phones get a lighter scene (fewer beans, no shadows, capped pixel ratio) and only start it on the
+    // first touch/scroll, so downloading three.js never competes with the first paint on slow devices
+    const isCompact = !window.matchMedia("(min-width: 768px)").matches;
+    const start = () => {
+      setCompact(isCompact);
+      setShow3D(true);
+    };
     const idle = window.requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 1200));
-    const id = idle(() => setShow3D(true));
+    let id = 0;
+    let fallback = 0;
+    const wake = () => {
+      ["touchstart", "scroll", "pointerdown"].forEach((e) => window.removeEventListener(e, wake));
+      window.clearTimeout(fallback);
+      start();
+    };
+    if (isCompact) {
+      ["touchstart", "scroll", "pointerdown"].forEach((e) => window.addEventListener(e, wake, { once: true, passive: true }));
+      fallback = window.setTimeout(wake, 6000);
+    } else {
+      id = idle(start) as number;
+    }
     const onMove = (e: PointerEvent) => {
       input.current.px = (e.clientX / window.innerWidth) * 2 - 1;
       input.current.py = (e.clientY / window.innerHeight) * 2 - 1;
@@ -41,7 +60,9 @@ export function HeroStage({ children }: { children: ReactNode }) {
     window.addEventListener("pointermove", onMove);
     window.addEventListener("deviceorientation", onTilt);
     return () => {
-      window.cancelIdleCallback?.(id as number);
+      window.cancelIdleCallback?.(id);
+      window.clearTimeout(fallback);
+      ["touchstart", "scroll", "pointerdown"].forEach((e) => window.removeEventListener(e, wake));
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("deviceorientation", onTilt);
     };
@@ -55,7 +76,7 @@ export function HeroStage({ children }: { children: ReactNode }) {
         trigger: section,
         start: "top top",
         end: "bottom top",
-        scrub: true,
+        scrub: 1,
         onUpdate: (self) => (input.current.scroll = self.progress),
       });
       // 2.5D depth: copy drifts up, arch sinks and tilts away as you leave the hero
@@ -64,7 +85,7 @@ export function HeroStage({ children }: { children: ReactNode }) {
         rotateX: 12,
         scale: 0.92,
         ease: "none",
-        scrollTrigger: { trigger: section, start: "top top", end: "bottom top", scrub: true },
+        scrollTrigger: { trigger: section, start: "top top", end: "bottom top", scrub: 1.2 },
       });
     },
     { scope: root },
@@ -73,8 +94,13 @@ export function HeroStage({ children }: { children: ReactNode }) {
   return (
     <div ref={root} className="relative w-full [perspective:1200px]">
       {show3D && (
-        <div className="pointer-events-none absolute -inset-y-40 inset-x-0 z-[5]">
-          <HeroScene input={input} />
+        <div
+          className={`pointer-events-none absolute inset-x-0 z-[5] ${
+            // phones: scene lives over the photo below the copy, never on top of the text
+            compact ? "bottom-0 h-[55%]" : "-inset-y-40"
+          }`}
+        >
+          <HeroScene input={input} compact={compact} />
         </div>
       )}
       {children}

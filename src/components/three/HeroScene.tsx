@@ -26,8 +26,8 @@ function useCupTexture() {
     const g = c.getContext("2d")!;
     g.scale(2, 2); // 2x canvas for a crisp logo; drawing below uses 1024x512 coordinates
     const grad = g.createLinearGradient(0, 0, 0, 512);
-    grad.addColorStop(0, "#d2a676");
-    grad.addColorStop(1, "#b98a5c");
+    grad.addColorStop(0, "#d8b585");
+    grad.addColorStop(1, "#c29c68");
     g.fillStyle = grad;
     g.fillRect(0, 0, 1024, 512);
     // paper fibre speckle
@@ -36,27 +36,17 @@ function useCupTexture() {
       g.fillStyle = `rgba(80,50,30,${r() * 0.08})`;
       g.fillRect(r() * 1024, r() * 512, 2, 2);
     }
-    // logo badge centred at u = 0.5
-    g.fillStyle = "#1a1411";
-    g.beginPath();
-    g.arc(512, 270, 120, 0, Math.PI * 2);
-    g.fill();
-    g.fillStyle = "#d9b98c";
-    for (const [dx, rot] of [[-22, -0.5], [22, 0.5]] as const) {
-      g.save();
-      g.translate(512 + dx, 225);
-      g.rotate(rot);
-      g.beginPath();
-      g.ellipse(0, 0, 16, 26, 0, 0, Math.PI * 2);
-      g.fill();
-      g.restore();
-    }
-    g.font = "600 46px Georgia, serif";
-    g.textAlign = "center";
-    g.fillText("CAFE NU", 512, 315);
     const tex = new THREE.CanvasTexture(c);
     tex.colorSpace = THREE.SRGBColorSpace;
     tex.anisotropy = 8;
+    // the real Cafe Nu logo, centred at u = 0.5 (faces the camera after the PI rotation)
+    const logo = new Image();
+    logo.onload = () => {
+      // cylinder u is stretched ~1.1x vs v, so draw slightly narrower to stay round
+      g.drawImage(logo, 512 - 135, 256 - 150, 270, 300);
+      tex.needsUpdate = true;
+    };
+    logo.src = "/images/cafe-nu-logo.png";
     return tex;
   }, []);
 }
@@ -139,14 +129,17 @@ function Cup({ input }: { input: MutableRefObject<SceneInput> }) {
     const { scroll, px, py } = input.current;
     const t = state.clock.elapsedTime;
     const wide = viewport.aspect > 1.1;
-    g.position.x = THREE.MathUtils.damp(g.position.x, wide ? viewport.width * 0.13 : 0, 4, dt);
-    g.position.y = THREE.MathUtils.damp(g.position.y, (wide ? -0.75 : -0.9) - scroll * 1.2 + Math.sin(t * 1.2) * 0.06, 4, dt);
-    g.rotation.y = THREE.MathUtils.damp(g.rotation.y, Math.PI + Math.sin(t * 0.4) * 0.35 + px * 0.5 + scroll * Math.PI * 1.4, 3, dt);
-    g.rotation.x = THREE.MathUtils.damp(g.rotation.x, py * 0.25 + scroll * 0.2, 3, dt);
+    // desktop: in front of the photo arch; phones: tucked at the right edge beside the copy
+    const x = wide ? viewport.width * 0.13 : viewport.width * 0.22;
+    const y = wide ? -0.75 : -viewport.height * 0.12;
+    g.position.x = THREE.MathUtils.damp(g.position.x, x, 2.5, dt);
+    g.position.y = THREE.MathUtils.damp(g.position.y, y - scroll * 1.2 + Math.sin(t * 1.1) * 0.07, 2.5, dt);
+    g.rotation.y = THREE.MathUtils.damp(g.rotation.y, Math.PI + Math.sin(t * 0.35) * 0.35 + px * 0.5 + scroll * Math.PI * 1.4, 2, dt);
+    g.rotation.x = THREE.MathUtils.damp(g.rotation.x, py * 0.22 + scroll * 0.2, 2, dt);
     // the "pour": cup tips forward as you scroll out of the hero
-    g.rotation.z = THREE.MathUtils.damp(g.rotation.z, -0.12 - scroll * 0.9, 3, dt);
-    const s = wide ? 0.62 : 0.55;
-    g.scale.setScalar(THREE.MathUtils.damp(g.scale.x, s, 4, dt));
+    g.rotation.z = THREE.MathUtils.damp(g.rotation.z, -0.12 - scroll * 0.9, 2, dt);
+    const s = wide ? 0.62 : 0.5;
+    g.scale.setScalar(THREE.MathUtils.damp(g.scale.x, s, 2.5, dt));
   });
 
   return (
@@ -157,10 +150,10 @@ function Cup({ input }: { input: MutableRefObject<SceneInput> }) {
       </mesh>
       <mesh position={[0, -1.05, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <circleGeometry args={[0.64, 48]} />
-        <meshStandardMaterial color="#a77b50" roughness={0.9} />
+        <meshStandardMaterial color="#b08a58" roughness={0.9} />
       </mesh>
       <mesh geometry={lid} position={[0, -0.02, 0]}>
-        <meshStandardMaterial color="#141010" roughness={0.35} metalness={0.1} side={THREE.DoubleSide} />
+        <meshStandardMaterial color="#161616" roughness={0.3} metalness={0.15} side={THREE.DoubleSide} />
       </mesh>
       <mesh position={[0.28, 1.31, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <capsuleGeometry args={[0.05, 0.16, 6, 12]} />
@@ -171,31 +164,33 @@ function Cup({ input }: { input: MutableRefObject<SceneInput> }) {
   );
 }
 
-function Beans() {
+function Beans({ count, edges }: { count: number; edges: boolean }) {
   const { viewport } = useThree();
   const beans = useMemo(() => {
     const r = seeded(42);
     const rand = (a: number, b: number) => a + r() * (b - a);
-    return Array.from({ length: 16 }, () => ({
-      pos: [rand(-1, 1), rand(-1, 1), rand(-2.5, 1.2)] as const,
+    // on phones keep beans out of the text column so copy stays readable
+    const bx = () => (edges ? (r() < 0.5 ? -1 : 1) * rand(0.6, 1) : rand(-1, 1));
+    return Array.from({ length: count }, () => ({
+      pos: [bx(), rand(-1, 1), rand(-2.5, 1.2)] as const,
       rot: [rand(0, 6), rand(0, 6), rand(0, 6)] as [number, number, number],
       scale: rand(0.75, 1.25),
       speed: rand(0.8, 1.8),
     }));
-  }, []);
+  }, [count, edges]);
   const geo = useMemo(() => new THREE.SphereGeometry(1, 32, 16), []);
 
   return (
     <>
       {beans.map((b, i) => (
-        <Float key={i} speed={b.speed} rotationIntensity={1.6} floatIntensity={1.4}>
+        <Float key={i} speed={b.speed * 0.8} rotationIntensity={1.2} floatIntensity={1.2}>
           <group
             position={[b.pos[0] * viewport.width * 0.5, b.pos[1] * viewport.height * 0.5, b.pos[2]]}
             rotation={b.rot}
-            scale={b.scale}
+            scale={b.scale * (edges ? 0.7 : 1)}
           >
             <mesh geometry={geo} scale={[0.17, 0.25, 0.12]}>
-              <meshStandardMaterial color="#4a2c1c" roughness={0.45} />
+              <meshStandardMaterial color="#4b321f" roughness={0.4} />
             </mesh>
             <mesh position={[0, 0, 0.105]} scale={[0.018, 0.2, 0.02]} geometry={geo}>
               <meshStandardMaterial color="#1f120b" roughness={0.8} />
@@ -207,7 +202,7 @@ function Beans() {
   );
 }
 
-export default function HeroScene({ input }: { input: MutableRefObject<SceneInput> }) {
+export default function HeroScene({ input, compact }: { input: MutableRefObject<SceneInput>; compact: boolean }) {
   const wrap = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(true);
 
@@ -221,19 +216,19 @@ export default function HeroScene({ input }: { input: MutableRefObject<SceneInpu
   return (
     <div ref={wrap} className="absolute inset-0" aria-hidden="true">
       <Canvas
-        dpr={[1, 2]}
+        dpr={compact ? [1, 1.5] : [1, 2]}
         camera={{ position: [0, 0.4, 6.5], fov: 38 }}
-        gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
-        shadows
+        gl={{ alpha: true, antialias: !compact, powerPreference: "high-performance" }}
+        shadows={!compact}
         frameloop={active ? "always" : "never"}
       >
         <ambientLight intensity={0.55} />
         <directionalLight position={[3, 5, 4]} intensity={2.2} color="#ffe7c4" castShadow />
-        <pointLight position={[-4, 1, 2]} intensity={18} color="#e2b33c" />
-        <pointLight position={[3, -2, -2]} intensity={10} color="#2f7a82" />
+        <pointLight position={[-4, 1, 2]} intensity={20} color="#cfaa76" />
+        <pointLight position={[3, -2, -2]} intensity={8} color="#fff4e2" />
         <Cup input={input} />
-        <Beans />
-        <ContactShadows position={[0, -1.9, 0]} opacity={0.45} scale={10} blur={2.6} far={4} />
+        <Beans count={compact ? 8 : 16} edges={compact} />
+        {!compact && <ContactShadows position={[0, -1.9, 0]} opacity={0.45} scale={10} blur={2.6} far={4} />}
       </Canvas>
     </div>
   );

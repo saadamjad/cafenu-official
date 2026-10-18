@@ -33,10 +33,10 @@ export function Gallery() {
       gsap.fromTo(
         "[data-phone]",
         { rotateY: -35, rotateX: 12, rotateZ: -6, y: 120 },
-        { rotateY: 12, rotateX: -4, rotateZ: 3, y: -40, ease: "none", scrollTrigger: { trigger: root.current, start: "top bottom", end: "bottom top", scrub: 1 } },
+        { rotateY: 12, rotateX: -4, rotateZ: 3, y: -40, ease: "none", scrollTrigger: { trigger: root.current, start: "top bottom", end: "bottom top", scrub: 1.2 } },
       );
       gsap.utils.toArray<HTMLElement>("[data-photo]").forEach((p) => {
-        gsap.fromTo(p.querySelector("img"), { scale: 1.18 }, { scale: 1, ease: "none", scrollTrigger: { trigger: p, start: "top bottom", end: "bottom top", scrub: true } });
+        gsap.fromTo(p.querySelector("img"), { scale: 1.18 }, { scale: 1, ease: "none", scrollTrigger: { trigger: p, start: "top bottom", end: "bottom top", scrub: 1.2 } });
         gsap.from(p, { clipPath: "inset(18% 18% 18% 18% round 2rem)", duration: 1.3, ease: "expo.out", scrollTrigger: { trigger: p, start: "top 85%" } });
       });
     },
@@ -44,15 +44,15 @@ export function Gallery() {
   );
 
   return (
-    <section id="gallery" ref={root} aria-labelledby="gallery-title" className="relative overflow-hidden bg-espresso-deep py-28 text-cream">
+    <section id="gallery" ref={root} aria-labelledby="gallery-title" className="relative overflow-hidden bg-coal py-28 text-cream">
       <div className="mx-auto grid max-w-7xl gap-16 px-4 sm:px-8 lg:grid-cols-[0.8fr_1.2fr]">
         <div className="lg:sticky lg:top-24 lg:self-start">
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-latte">Gallery &amp; reels</p>
-          <h2 id="gallery-title" className="font-display text-[clamp(2.4rem,5vw,4.2rem)] font-semibold leading-[0.95]">
+          <p className="eyebrow eyebrow--light mb-5">Gallery &amp; reels</p>
+          <h2 id="gallery-title" className="font-display text-[clamp(2.4rem,5vw,4.2rem)] font-medium leading-[0.95]">
             Straight from our tables
           </h2>
           <div className="mx-auto mt-12 w-[min(17rem,70vw)] [perspective:1400px] lg:mx-0">
-            <div data-phone className="relative rounded-[2.6rem] border-[10px] border-[#0d0a08] bg-black shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)] [transform-style:preserve-3d]">
+            <div data-phone className="relative rounded-[2.6rem] border-[10px] border-[#0e0e0e] bg-black shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)] [transform-style:preserve-3d]">
               <div className="absolute left-1/2 top-2 z-10 h-5 w-20 -translate-x-1/2 rounded-full bg-black" aria-hidden="true" />
               <video
                 ref={video}

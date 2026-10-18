@@ -49,8 +49,8 @@ export function MenuBoard() {
       <div className="mx-auto max-w-7xl px-4 sm:px-8">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-teal">The menu</p>
-            <h2 id="menu-title" className="font-display text-[clamp(2.6rem,6vw,5rem)] font-semibold leading-[0.95] text-espresso">
+            <p className="eyebrow mb-5">The menu</p>
+            <h2 id="menu-title" className="font-display text-[clamp(2.6rem,6vw,5rem)] font-medium leading-[0.95] text-ink">
               Coffee, brunch &amp; plates
             </h2>
             <p className="mt-4 max-w-xl text-lg text-muted">
@@ -61,7 +61,7 @@ export function MenuBoard() {
           <a
             href="/cafe-nu-menu.pdf"
             download
-            className="inline-flex min-h-12 items-center gap-2 rounded-full border-2 border-espresso px-6 py-3 font-semibold text-espresso transition hover:bg-espresso hover:text-cream"
+            className="inline-flex min-h-12 items-center gap-2 rounded-full border-2 border-ink px-6 py-3 font-semibold text-ink transition hover:bg-ink hover:text-cream"
           >
             Download PDF menu
           </a>
@@ -69,7 +69,7 @@ export function MenuBoard() {
 
         <nav aria-label="Menu categories" className="sticky top-0 z-30 -mx-4 mt-12 bg-cream/90 px-4 py-3 backdrop-blur-md sm:-mx-8 sm:px-8">
           <div ref={pills} className="relative flex gap-2 overflow-x-auto [scrollbar-width:none]">
-            <span data-indicator aria-hidden="true" className="absolute left-0 top-0 h-full rounded-full bg-espresso" style={{ width: 0 }} />
+            <span data-indicator aria-hidden="true" className="absolute left-0 top-0 h-full rounded-full bg-ink" style={{ width: 0 }} />
             {menu.map((c) => (
               <a
                 key={c.id}
@@ -77,7 +77,7 @@ export function MenuBoard() {
                 data-pill={c.id}
                 aria-current={active === c.id ? "true" : undefined}
                 className={`relative z-10 whitespace-nowrap rounded-full px-4 py-3 text-sm font-semibold transition-colors ${
-                  active === c.id ? "text-cream" : "text-espresso hover:bg-espresso/5"
+                  active === c.id ? "text-cream" : "text-ink hover:bg-ink/5"
                 }`}
               >
                 {c.title}
@@ -90,16 +90,16 @@ export function MenuBoard() {
           {menu.map((c) => (
             <div key={c.id} id={`menu-${c.id}`} data-cat className="scroll-mt-40 [perspective:800px]">
               <div className="overflow-hidden">
-                <h3 className="font-display border-b-2 border-espresso pb-3 text-4xl font-semibold text-espresso">{c.title}</h3>
+                <h3 className="font-display border-b border-ink/70 pb-3 text-4xl font-medium italic text-ink">{c.title}</h3>
               </div>
               {c.note && <p className="mt-3 text-sm italic text-muted">{c.note}</p>}
               <ul className="mt-6 space-y-6">
                 {c.items.map((i) => (
                   <li key={i.name}>
                     <div className="flex items-baseline">
-                      <h4 className="font-semibold text-espresso">{i.name}</h4>
+                      <h4 className="font-medium tracking-wide text-ink">{i.name}</h4>
                       <span className="leader" aria-hidden="true" />
-                      <span className="font-display text-lg font-semibold tabular-nums text-teal">{formatPrice(i.price)}</span>
+                      <span className="font-display text-lg font-medium tabular-nums text-gold-deep">{formatPrice(i.price)}</span>
                     </div>
                     {i.description && <p className="mt-1 max-w-[52ch] text-sm leading-relaxed text-muted">{i.description}</p>}
                   </li>

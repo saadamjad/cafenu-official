@@ -26,6 +26,18 @@ for (const [file, slug] of Object.entries(photos)) {
   console.log("✓", slug);
 }
 
+// Logo: mask the round badge onto a transparent background
+const LOGO = path.join(SRC, "828554365_122102163111491872_8835121402564258197_n.jpg");
+const size = 480;
+const circle = Buffer.from(`<svg width="${size}" height="${size}"><circle cx="${size / 2}" cy="${size / 2}" r="${size / 2 - 1}" fill="#fff"/></svg>`);
+await sharp(LOGO)
+  .resize(size, size, { fit: "cover" })
+  .ensureAlpha()
+  .composite([{ input: circle, blend: "dest-in" }])
+  .png({ compressionLevel: 9 })
+  .toFile(`${OUT}/cafe-nu-logo.png`);
+console.log("✓ logo");
+
 // Open Graph card (1200x630) from the breakfast hero shot
 await sharp(path.join(SRC, "IIV02021.jpg.jpeg"))
   .resize(1200, 630, { fit: "cover" })

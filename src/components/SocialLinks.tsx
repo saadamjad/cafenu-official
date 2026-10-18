@@ -42,8 +42,8 @@ export function SocialLinks({ variant = "pill", className = "" }: { variant?: Va
             aria-label={variant === "icon" ? `${site.name} on ${labels[key]}` : undefined}
             className={
               variant === "pill"
-                ? "inline-flex min-h-12 items-center gap-2.5 rounded-full bg-cream px-5 py-3 font-semibold text-espresso shadow-lg transition hover:-translate-y-0.5 hover:bg-mustard"
-                : "grid h-11 w-11 place-items-center rounded-full border border-current/30 transition hover:border-mustard hover:bg-mustard hover:text-espresso"
+                ? "inline-flex min-h-12 items-center gap-2.5 rounded-full bg-cream px-5 py-3 font-semibold text-ink shadow-lg transition hover:-translate-y-0.5 hover:bg-gold"
+                : "grid h-11 w-11 place-items-center rounded-full border border-current/30 transition hover:border-gold hover:bg-gold hover:text-ink"
             }
           >
             {icons[key]}
