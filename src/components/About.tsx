@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRef } from "react";
 import { gsap, useGSAP, prefersReducedMotion } from "@/lib/gsap";
 
-// Pinned three-layer parallax: tiles (back), salad (mid), branded cup (front).
+// Pinned three-layer parallax: breakfast (back), salad (mid), branded cup (front).
 export function About() {
   const root = useRef<HTMLElement>(null);
 
@@ -40,7 +40,9 @@ export function About() {
     <section id="about" ref={root} aria-labelledby="about-title" className="relative overflow-hidden bg-cream py-16 sm:py-24 md:py-32 lg:flex lg:min-h-screen lg:items-center lg:py-0">
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 md:gap-16 md:px-8 lg:grid-cols-2">
         <div className="relative mx-auto h-[400px] w-full max-w-lg sm:h-[520px] [perspective:1400px] lg:h-[640px]">
-          <div data-layer="back" className="tiles absolute left-[6%] top-[4%] h-[62%] w-[70%] rounded-3xl opacity-90 shadow-xl" />
+          <div data-layer="back" className="absolute left-[6%] top-[4%] h-[62%] w-[70%] overflow-hidden rounded-3xl shadow-xl">
+            <Image src="/images/cafe-nu-all-day-breakfast-latte.jpg" alt="Cafe Nu all-day breakfast and a latte on a white table over the checkered floor" fill quality={85} sizes="(min-width: 1024px) 22rem, 70vw" className="object-cover object-[30%_50%]" />
+          </div>
           <div data-layer="mid" className="absolute right-0 top-[10%] h-[62%] w-[58%] overflow-hidden rounded-3xl shadow-2xl">
             <Image src="/images/cafe-nu-caesar-salad.jpg" alt="Caesar salad being finished with parmesan in front of Cafe Nu's teal velvet chairs" fill quality={85} sizes="(min-width: 1024px) 18rem, 55vw" className="object-cover" />
           </div>
