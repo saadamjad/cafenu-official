@@ -24,7 +24,7 @@ export function Signatures() {
           cards.forEach((c) => {
             const r = c.getBoundingClientRect();
             const d = gsap.utils.clamp(-1, 1, (r.left + r.width / 2 - mid) / mid);
-            gsap.set(c, { rotateY: d * -28, z: -Math.abs(d) * 160, opacity: 1 - Math.abs(d) * 0.35 });
+            gsap.set(c, { rotateY: d * -28, z: -Math.abs(d) * 160 });
           });
         };
 
@@ -106,9 +106,9 @@ export function Signatures() {
 
   return (
     <section id="signatures" ref={root} aria-labelledby="sig-title" className="relative overflow-hidden bg-ink py-24 text-cream md:flex md:h-screen md:flex-col md:justify-center md:py-0">
-      <div className="mx-auto mb-12 w-full max-w-7xl px-4 sm:px-8">
+      <div className="mx-auto mb-12 w-full max-w-7xl px-5 md:px-8">
         <p className="eyebrow eyebrow--light mb-5">Signature plates</p>
-        <h2 id="sig-title" className="font-display max-w-3xl text-[clamp(2.4rem,5vw,4.2rem)] font-medium leading-[1] tracking-[-0.01em]">
+        <h2 id="sig-title" className="h2 max-w-3xl">
           Five plates from our kitchen.
         </h2>
       </div>
@@ -125,7 +125,7 @@ export function Signatures() {
               </div>
               <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 [background:radial-gradient(circle_at_var(--gx,50%)_var(--gy,50%),rgba(255,255,255,0.25),transparent_45%)]" />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-coal via-coal/85 to-transparent p-6 pt-20">
-                <p className="font-script text-2xl leading-none text-gold">{d.category}</p>
+                <p className="text-[0.7rem] font-semibold uppercase tracking-[0.25em] text-gold">{d.category}</p>
                 <h3 className="font-display mt-2 text-2xl font-medium leading-tight">{d.name}</h3>
                 <p className="mt-2 line-clamp-2 text-sm text-cream/75">{d.description}</p>
                 <p className="mt-4 inline-block rounded-full bg-gold px-4 py-1.5 text-sm font-bold text-ink">{formatPrice(d.price)}</p>

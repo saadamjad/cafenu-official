@@ -18,8 +18,9 @@ export function About() {
         });
         tl.fromTo("[data-layer=back]", { yPercent: 10, rotate: -6 }, { yPercent: -20, rotate: 4, ease: "none" }, 0)
           .fromTo("[data-layer=mid]", { yPercent: 30, rotateY: -25 }, { yPercent: -15, rotateY: 8, ease: "none" }, 0)
-          .fromTo("[data-layer=front]", { yPercent: 70, rotateY: 30, rotateZ: 6 }, { yPercent: -30, rotateY: -10, rotateZ: -3, ease: "none" }, 0)
-          .fromTo(lines, { opacity: 0.35, y: 30 }, { opacity: 1, y: 0, stagger: 0.12, ease: "power2.out" }, 0);
+          .fromTo("[data-layer=front]", { yPercent: 70, rotateY: 30, rotateZ: 6 }, { yPercent: -30, rotateY: -10, rotateZ: -3, ease: "none" }, 0);
+        // copy reveals once, fully legible (no half-faded scrubbed text)
+        gsap.from(lines, { opacity: 0, y: 32, stagger: 0.12, duration: 1.2, ease: "expo.out", scrollTrigger: { trigger: root.current, start: "top 60%" } });
       });
       mm.add("(max-width: 1023px)", () => {
         // phones: no pinning, but the three layers still drift at different depths
@@ -36,8 +37,8 @@ export function About() {
   );
 
   return (
-    <section id="about" ref={root} aria-labelledby="about-title" className="relative overflow-hidden bg-cream py-28 lg:flex lg:min-h-screen lg:items-center lg:py-0">
-      <div className="mx-auto grid max-w-7xl items-center gap-16 px-4 sm:px-8 lg:grid-cols-2">
+    <section id="about" ref={root} aria-labelledby="about-title" className="relative overflow-hidden bg-cream py-24 md:py-32 lg:flex lg:min-h-screen lg:items-center lg:py-0">
+      <div className="mx-auto grid max-w-7xl items-center gap-16 px-5 md:px-8 lg:grid-cols-2">
         <div className="relative mx-auto h-[520px] w-full max-w-lg [perspective:1400px] lg:h-[640px]">
           <div data-layer="back" className="tiles absolute left-[6%] top-[4%] h-[62%] w-[70%] rounded-3xl opacity-90 shadow-xl" />
           <div data-layer="mid" className="absolute right-0 top-[10%] h-[62%] w-[58%] overflow-hidden rounded-3xl shadow-2xl">
@@ -50,22 +51,32 @@ export function About() {
 
         <div>
           <p className="eyebrow mb-5">About Cafe Nu</p>
-          <h2 id="about-title" className="font-display text-[clamp(2.6rem,5.5vw,4.6rem)] font-medium leading-[1] tracking-[-0.01em] text-ink">
-            A modern cafe made for <em className="text-gold-deep">slow mornings</em> and long lunches.
+          <h2 id="about-title" className="h2 text-ink">
+            Freshness, flavour and comfort, <em className="text-gold-deep">all day long.</em>
           </h2>
           <div className="mt-8 space-y-5 text-lg font-light leading-relaxed text-muted">
             <p data-line>
-              Cafe Nu is a modern coffee cafe and restaurant. Our espresso bar pours everything from a straight doppio
-              to Spanish lattes, iced matcha and frappés.
+              Cafe Nu is a modern all-day dining destination in DHA Phase 2, Karachi. From handcrafted coffee and
+              in-house baked breads to wholesome breakfasts, pizzas, pastas and signature meals, everything is
+              thoughtfully prepared.
             </p>
             <p data-line>
-              The kitchen runs all day: our signature all-day breakfast, scrambled eggs in a buttery croissant, a
-              traditional Pakistani omelette, creamy pastas, club sandwiches, burgers, pizza and steaks.
-            </p>
-            <p data-line>
-              Pull up a teal velvet chair at an oak table under arched pendant lights and greenery, on our black-and-white tiled floor, and stay as long as you like.
+              Pull up a teal velvet chair at an oak table, under arched pendant lights and greenery, and let our team
+              look after you. A warm room and quality service make every visit feel special.
             </p>
           </div>
+          <ul data-line className="mt-10 grid grid-cols-3 gap-4 border-t border-line pt-8">
+            {[
+              ["Handcrafted", "coffee & matcha"],
+              ["Baked", "in-house breads"],
+              ["All-day", "breakfast & plates"],
+            ].map(([a, b]) => (
+              <li key={a}>
+                <p className="font-display text-2xl text-ink md:text-3xl">{a}</p>
+                <p className="mt-1 text-sm text-muted">{b}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

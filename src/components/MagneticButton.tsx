@@ -2,10 +2,17 @@
 import { useRef, type ReactNode } from "react";
 import { gsap } from "@/lib/gsap";
 
-type Props = { href: string; children: ReactNode; variant?: "solid" | "ghost" | "dark"; download?: boolean; className?: string };
+type Props = {
+  href: string;
+  children: ReactNode;
+  variant?: "solid" | "ghost" | "dark";
+  download?: boolean;
+  external?: boolean;
+  className?: string;
+};
 
 // A link that leans toward the pointer, then springs back.
-export function MagneticButton({ href, children, variant = "solid", download, className = "" }: Props) {
+export function MagneticButton({ href, children, variant = "solid", download, external, className = "" }: Props) {
   const ref = useRef<HTMLAnchorElement>(null);
 
   const onMove = (e: React.PointerEvent) => {
@@ -32,6 +39,7 @@ export function MagneticButton({ href, children, variant = "solid", download, cl
       ref={ref}
       href={href}
       download={download}
+      {...(external ? { target: "_blank", rel: "noopener" } : {})}
       onPointerMove={onMove}
       onPointerLeave={onLeave}
       className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-7 py-3 text-base font-semibold tracking-wide transition-colors duration-500 ${styles} ${className}`}

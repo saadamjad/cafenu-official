@@ -42,3 +42,4 @@ next-env.d.ts
 
 # original high-res media (kept out of git; optimized copies live in public/)
 /resources/
+!.env.example

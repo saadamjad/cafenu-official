@@ -1,6 +1,9 @@
 import Image from "next/image";
 import { HeroStage } from "@/components/HeroStage";
 import { MagneticButton } from "@/components/MagneticButton";
+import { OpenStatus } from "@/components/OpenStatus";
+import { DirectionsIcon } from "@/components/Icons";
+import { site } from "@/content/site";
 
 function Kinetic({ text, offset = 0 }: { text: string; offset?: number }) {
   return (
@@ -24,7 +27,7 @@ export function Hero() {
       <div className="absolute inset-0 -z-20 bg-[radial-gradient(ellipse_at_72%_40%,#3b3227_0%,#1f1f1f_42%,#141414_80%)]" />
 
       <HeroStage>
-        <div className="relative mx-auto grid w-full max-w-7xl items-center gap-12 px-4 sm:px-8 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="relative mx-auto grid w-full max-w-7xl items-center gap-12 px-5 md:px-8 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="relative z-10">
             <p className="fade-up eyebrow eyebrow--light mb-4" style={{ ["--d" as string]: "0.1s" }}>
               Specialty coffee &amp; all-day kitchen
@@ -42,15 +45,18 @@ export function Hero() {
               </span>
             </h1>
             <p className="fade-up mt-6 max-w-lg text-lg font-light leading-relaxed text-cream/70" style={{ ["--d" as string]: "0.8s" }}>
-              Espresso and iced matcha, all-day breakfast, creamy pastas, club sandwiches and steaks, served at
-              warm oak tables and teal velvet chairs.
+              Handcrafted coffee, in-house baked breads and all-day dining (breakfasts, pizzas, pastas and
+              signature plates) on Old Sunset Boulevard, DHA Phase 2, Karachi.
             </p>
             <div className="fade-up mt-10 flex flex-wrap gap-4" style={{ ["--d" as string]: "1s" }}>
               <MagneticButton href="#menu">View the menu</MagneticButton>
-              <MagneticButton href="#visit" variant="ghost">
-                Visit us
+              <MagneticButton href={site.directionsUrl} variant="ghost" external>
+                <DirectionsIcon /> Get directions
               </MagneticButton>
             </div>
+            <p className="fade-up mt-8 text-sm text-cream/75" style={{ ["--d" as string]: "1.2s" }}>
+              <OpenStatus />
+            </p>
           </div>
 
           {/* LCP image: always server-rendered, the 3D cup floats over it */}

@@ -44,11 +44,11 @@ export function Gallery() {
   );
 
   return (
-    <section id="gallery" ref={root} aria-labelledby="gallery-title" className="relative overflow-hidden bg-coal py-28 text-cream">
-      <div className="mx-auto grid max-w-7xl gap-16 px-4 sm:px-8 lg:grid-cols-[0.8fr_1.2fr]">
+    <section id="gallery" ref={root} aria-labelledby="gallery-title" className="relative overflow-hidden bg-coal py-24 md:py-32 text-cream">
+      <div className="mx-auto grid max-w-7xl gap-16 px-5 md:px-8 lg:grid-cols-[0.8fr_1.2fr]">
         <div className="lg:sticky lg:top-24 lg:self-start">
           <p className="eyebrow eyebrow--light mb-5">Gallery &amp; reels</p>
-          <h2 id="gallery-title" className="font-display text-[clamp(2.4rem,5vw,4.2rem)] font-medium leading-[0.95]">
+          <h2 id="gallery-title" className="h2">
             Straight from our tables
           </h2>
           <div className="mx-auto mt-12 w-[min(17rem,70vw)] [perspective:1400px] lg:mx-0">

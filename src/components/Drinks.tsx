@@ -72,10 +72,10 @@ export function Drinks() {
   );
 
   return (
-    <section id="drinks" ref={root} aria-labelledby="drinks-title" className="relative overflow-hidden bg-[#efe6d6] py-28">
-      <div className="mx-auto max-w-7xl px-4 sm:px-8">
+    <section id="drinks" ref={root} aria-labelledby="drinks-title" className="relative overflow-hidden bg-[#efe6d6] py-24 md:py-32">
+      <div className="mx-auto max-w-7xl px-5 md:px-8">
         <p className="eyebrow mb-5">The bar</p>
-        <h2 id="drinks-title" className="font-display max-w-3xl text-[clamp(2.4rem,5vw,4.2rem)] font-medium leading-[0.95] text-ink">
+        <h2 id="drinks-title" className="h2 max-w-3xl text-ink">
           Espresso, iced matcha &amp; frappés
         </h2>
         <p className="mt-4 max-w-xl text-lg text-muted">

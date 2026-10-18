@@ -41,7 +41,6 @@
   --color-line: var(--line);
   --font-display: var(--font-playfair);
   --font-sans: var(--font-outfit);
-  --font-script: var(--font-script);
 }
 
 html {
@@ -82,32 +81,37 @@ body {
   font-family: var(--font-playfair), Georgia, serif;
   font-optical-sizing: auto;
 }
-.font-script {
-  font-family: var(--font-script), cursive;
-  font-weight: 400;
-  letter-spacing: 0;
-  text-transform: none;
-}
 
-/* Section eyebrow: script word + thin gold rule */
+/* Section eyebrow: small tracked caps + thin gold rule */
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 0.9rem;
-  font-family: var(--font-script), cursive;
-  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  gap: 0.85rem;
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
   line-height: 1;
   color: var(--gold-deep);
 }
 .eyebrow::before {
   content: "";
-  width: 2.5rem;
+  width: 2rem;
   height: 1px;
   background: currentColor;
-  opacity: 0.6;
 }
 .eyebrow--light {
   color: var(--gold);
+}
+
+/* Shared section heading scale */
+.h2 {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: clamp(2.3rem, 4.6vw, 3.9rem);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.01em;
 }
 
 .skip-link {
@@ -125,24 +129,14 @@ body {
   top: 1rem;
 }
 
-/* Film grain: animated on desktop, static on touch devices (cheaper to paint) */
+/* Film grain: very subtle, static (no repaint cost) */
 .grain {
   pointer-events: none;
   position: fixed;
-  inset: -50%;
+  inset: 0;
   z-index: 60;
-  opacity: 0.05;
+  opacity: 0.03;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-@media (hover: hover) and (pointer: fine) {
-  .grain { animation: grain 1.6s steps(5) infinite; }
-}
-@keyframes grain {
-  0% { transform: translate(0, 0); }
-  25% { transform: translate(-3%, 2%); }
-  50% { transform: translate(2%, -3%); }
-  75% { transform: translate(-2%, 3%); }
-  100% { transform: translate(0, 0); }
 }
 
 /* Checker tile motif (the cafe floor), in logo charcoal */
@@ -263,11 +257,6 @@ body {
 }
 .flip:hover .flip__liquid,
 .flip[data-flipped="true"] .flip__liquid { height: 78%; }
-
-/* Cursor */
-@media (pointer: fine) {
-  .has-custom-cursor, .has-custom-cursor a, .has-custom-cursor button { cursor: none; }
-}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

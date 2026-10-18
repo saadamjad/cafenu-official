@@ -1,8 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { Great_Vibes, Outfit, Playfair_Display } from "next/font/google";
+import { Outfit, Playfair_Display } from "next/font/google";
 import { buildMetadata } from "@/lib/seo";
 import { SmoothScroll } from "@/components/SmoothScroll";
-import { Cursor } from "@/components/Cursor";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -18,13 +17,6 @@ const outfit = Outfit({
   display: "swap",
 });
 
-const script = Great_Vibes({
-  variable: "--font-script",
-  subsets: ["latin"],
-  weight: "400",
-  display: "swap",
-});
-
 export const metadata: Metadata = buildMetadata();
 
 export const viewport: Viewport = {
@@ -35,13 +27,12 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${playfair.variable} ${outfit.variable} ${script.variable}`}>
+    <html lang="en" className={`${playfair.variable} ${outfit.variable}`}>
       <body>
         <a href="#main" className="skip-link">
           Skip to content
         </a>
         <SmoothScroll />
-        <Cursor />
         {children}
         <div className="grain" aria-hidden="true" />
       </body>

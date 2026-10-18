@@ -1,14 +1,16 @@
 import { Preloader } from "@/components/Preloader";
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
-import { Marquee } from "@/components/Marquee";
+import { InfoBar } from "@/components/InfoBar";
 import { About } from "@/components/About";
 import { Signatures } from "@/components/Signatures";
 import { MenuBoard } from "@/components/MenuBoard";
 import { Drinks } from "@/components/Drinks";
+import { Reviews } from "@/components/Reviews";
 import { Gallery } from "@/components/Gallery";
 import { Visit } from "@/components/Visit";
 import { Footer } from "@/components/Footer";
+import { MobileActions } from "@/components/MobileActions";
 import { JsonLd } from "@/components/JsonLd";
 
 export default function Home() {
@@ -19,15 +21,17 @@ export default function Home() {
       <Nav />
       <main id="main">
         <Hero />
-        <Marquee />
+        <InfoBar />
         <About />
         <Signatures />
         <MenuBoard />
         <Drinks />
+        <Reviews />
         <Gallery />
         <Visit />
       </main>
       <Footer />
+      <MobileActions />
     </>
   );
 }

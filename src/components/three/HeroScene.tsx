@@ -170,7 +170,8 @@ function Beans({ count, edges }: { count: number; edges: boolean }) {
     const r = seeded(42);
     const rand = (a: number, b: number) => a + r() * (b - a);
     // on phones keep beans out of the text column so copy stays readable
-    const bx = () => (edges ? (r() < 0.5 ? -1 : 1) * rand(0.6, 1) : rand(-1, 1));
+    // desktop: keep beans to the right half and outer edge so none crosses the headline
+    const bx = () => (edges ? (r() < 0.5 ? -1 : 1) * rand(0.6, 1) : r() < 0.2 ? rand(-1, -0.85) : rand(0.05, 1));
     return Array.from({ length: count }, () => ({
       pos: [bx(), rand(-1, 1), rand(-2.5, 1.2)] as const,
       rot: [rand(0, 6), rand(0, 6), rand(0, 6)] as [number, number, number],
@@ -227,7 +228,7 @@ export default function HeroScene({ input, compact }: { input: MutableRefObject<
         <pointLight position={[-4, 1, 2]} intensity={20} color="#cfaa76" />
         <pointLight position={[3, -2, -2]} intensity={8} color="#fff4e2" />
         <Cup input={input} />
-        <Beans count={compact ? 8 : 16} edges={compact} />
+        <Beans count={compact ? 7 : 10} edges={compact} />
         {!compact && <ContactShadows position={[0, -1.9, 0]} opacity={0.45} scale={10} blur={2.6} far={4} />}
       </Canvas>
     </div>

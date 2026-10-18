@@ -1,13 +1,15 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { site, telHref } from "@/content/site";
+import { DirectionsIcon, PhoneIcon } from "@/components/Icons";
 import { SocialLinks } from "@/components/SocialLinks";
 
 const links = [
   { href: "#about", label: "About" },
-  { href: "#signatures", label: "Signatures" },
   { href: "#menu", label: "Menu" },
   { href: "#drinks", label: "Coffee & Matcha" },
+  { href: "#reviews", label: "Reviews" },
   { href: "#gallery", label: "Gallery" },
   { href: "#visit", label: "Visit" },
 ];
@@ -17,6 +19,7 @@ export function Nav() {
   const [solid, setSolid] = useState(false);
   const [open, setOpen] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [active, setActive] = useState<string | null>(null);
 
   useEffect(() => {
     let last = window.scrollY;
@@ -33,6 +36,19 @@ export function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // highlight the section currently in view
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && setActive(`#${e.target.id}`)),
+      { rootMargin: "-45% 0px -50% 0px" },
+    );
+    ["top", ...links.map((l) => l.href.slice(1))].forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) io.observe(el);
+    });
+    return () => io.disconnect();
+  }, []);
+
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
@@ -42,40 +58,65 @@ export function Nav() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${hidden && !open ? "-translate-y-full" : ""}`}
+      className={`fixed inset-x-0 top-0 z-50 text-cream transition-[transform,background-color,box-shadow] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        hidden && !open ? "-translate-y-full" : ""
+      } ${solid || open ? "bg-coal/85 shadow-[0_1px_0_rgb(207_170_118/0.15)] backdrop-blur-xl" : ""}`}
     >
-      <div
-        className={`mx-auto flex h-[72px] max-w-7xl items-center justify-between px-4 transition-colors duration-500 sm:px-8 ${
-          solid || open ? "bg-coal/80 shadow-[0_1px_0_rgb(207_170_118/0.15)] backdrop-blur-xl" : ""
-        } text-cream`}
-      >
-        <a href="#top" className="group block" aria-label="Cafe Nu home">
+      <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between gap-6 px-5 md:px-8">
+        <a href="#top" className="group block shrink-0" aria-label="Cafe Nu home">
           <Image
-            src="/images/cafe-nu-logo.png"
+            src="/images/cafe-nu-logo-168.png"
             alt="Cafe Nu"
             width={56}
             height={56}
             priority
-            className="h-14 w-14 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 group-hover:rotate-[12deg]"
+            unoptimized
+            className="h-14 w-14 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:rotate-[12deg] group-hover:scale-105"
           />
         </a>
+
         <nav aria-label="Main" className="hidden lg:block">
           <ul className="flex items-center gap-1">
             {links.map((l) => (
               <li key={l.href}>
-                <a href={l.href} className="rounded-full px-4 py-3 text-sm font-medium opacity-85 transition hover:bg-white/10 hover:opacity-100">
+                <a
+                  href={l.href}
+                  aria-current={active === l.href ? "true" : undefined}
+                  className={`relative rounded-full px-3.5 py-3 text-[0.92rem] font-medium transition-colors xl:px-4 ${
+                    active === l.href ? "text-gold" : "text-cream/80 hover:text-cream"
+                  }`}
+                >
                   {l.label}
+                  <span
+                    aria-hidden="true"
+                    className={`absolute inset-x-4 bottom-1.5 h-px origin-left bg-gold transition-transform duration-500 ${
+                      active === l.href ? "scale-x-100" : "scale-x-0"
+                    }`}
+                  />
                 </a>
               </li>
             ))}
           </ul>
         </nav>
-        <div className="hidden items-center gap-3 lg:flex">
-          <SocialLinks variant="icon" className="gap-2" />
-          <a href="#menu" className="rounded-full bg-gold px-5 py-3 text-sm font-semibold text-ink">
-            View menu
+
+        <div className="hidden items-center gap-5 lg:flex">
+          {telHref && (
+            <a href={telHref} className="inline-flex items-center gap-2 text-sm font-medium text-cream/85 transition-colors hover:text-gold">
+              <PhoneIcon className="h-4 w-4 text-gold" />
+              {site.phoneDisplay}
+            </a>
+          )}
+          <a
+            href={site.directionsUrl}
+            target="_blank"
+            rel="noopener"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gold px-5 text-sm font-semibold text-ink transition-colors hover:bg-gold-light"
+          >
+            <DirectionsIcon className="h-4 w-4" />
+            Get directions
           </a>
         </div>
+
         <button
           type="button"
           className="grid h-12 w-12 place-items-center rounded-full lg:hidden"
@@ -85,31 +126,41 @@ export function Nav() {
           onClick={() => setOpen((o) => !o)}
         >
           <span className="relative block h-3 w-6">
-            <span className={`absolute left-0 top-0 h-0.5 w-6 bg-current transition ${open ? "translate-y-1.5 rotate-45" : ""}`} />
-            <span className={`absolute bottom-0 left-0 h-0.5 w-6 bg-current transition ${open ? "-translate-y-1 -rotate-45" : ""}`} />
+            <span className={`absolute left-0 top-0 h-0.5 w-6 bg-current transition duration-300 ${open ? "translate-y-[5px] rotate-45" : ""}`} />
+            <span className={`absolute bottom-0 left-0 h-0.5 w-6 bg-current transition duration-300 ${open ? "-translate-y-[5px] -rotate-45" : ""}`} />
           </span>
         </button>
       </div>
-      <div
-        className="absolute left-0 top-0 h-[2px] bg-gold"
-        style={{ width: `${progress * 100}%` }}
-        aria-hidden="true"
-      />
+
+      <div className="absolute left-0 top-0 h-[2px] bg-gold" style={{ width: `${progress * 100}%` }} aria-hidden="true" />
+
       <nav
         id="mobile-nav"
         aria-label="Mobile"
-        className={`overflow-hidden bg-coal/95 text-cream backdrop-blur-md transition-[max-height] duration-500 lg:hidden ${open ? "max-h-[80vh]" : "max-h-0"}`}
+        className={`overflow-hidden transition-[max-height] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] lg:hidden ${open ? "max-h-[90vh]" : "max-h-0"}`}
       >
-        <ul className="flex flex-col px-4 pb-6">
+        <ul className="flex flex-col px-5 pb-4">
           {links.map((l) => (
             <li key={l.href}>
-              <a href={l.href} onClick={() => setOpen(false)} className="font-display block border-b border-white/10 py-4 text-3xl">
+              <a
+                href={l.href}
+                onClick={() => setOpen(false)}
+                tabIndex={open ? 0 : -1}
+                className="font-display block border-b border-white/10 py-3.5 text-2xl"
+              >
                 {l.label}
               </a>
             </li>
           ))}
         </ul>
-        <SocialLinks className="px-4 pb-8" />
+        <div className="flex flex-wrap gap-3 px-5 pb-4">
+          {telHref && (
+            <a href={telHref} tabIndex={open ? 0 : -1} className="inline-flex min-h-12 items-center gap-2 rounded-full bg-gold px-5 font-semibold text-ink">
+              <PhoneIcon className="h-4 w-4" /> Call {site.phoneDisplay}
+            </a>
+          )}
+        </div>
+        <SocialLinks className="px-5 pb-8" />
       </nav>
     </header>
   );

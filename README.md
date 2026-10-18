@@ -15,13 +15,25 @@ npm run media        # re-generate web images from /resources (originals, not in
 
 | What | File |
 |---|---|
-| Address, phone, WhatsApp, hours, socials, city, Maps link | `src/content/site.ts` (**TODO before launch**) |
+| Address, phone, WhatsApp, hours, socials, city, Maps links | `src/content/site.ts` |
 | Menu items, prices, descriptions, dish photos | `src/content/menu.ts` |
 | Title / description / Open Graph | `src/lib/seo.ts` |
 | Structured data (LocalBusiness + Menu) | `src/components/JsonLd.tsx` |
 
 Anything left `null` in `site.ts` is hidden on the page **and** omitted from structured data, so no fake
 details are ever published. Setting `city` also adds it to the page title and description.
+
+## Live Google reviews
+
+The Reviews section reads the rating and up to 5 reviews from **Places API (New)** at request time, via
+`/api/reviews`. Per Google's policy, review content is never cached. It is fetched only when a visitor scrolls to
+the section. Set these environment variables in Hostinger (see `.env.example`):
+
+- `GOOGLE_PLACES_API_KEY`: an API key restricted to Places API (New), with a daily quota cap
+- `GOOGLE_PLACE_ID`: Cafe NU's place ID
+
+Without them the section shows "Read all on Google / Write a review" links and no numbers. Reviews are billed at
+the Places "Enterprise + Atmosphere" tier, so check current pricing in Google Cloud.
 
 ## Page structure (`/`)
 

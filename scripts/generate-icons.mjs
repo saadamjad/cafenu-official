@@ -40,4 +40,6 @@ await writeFile("src/app/apple-icon.png", await square(180, 0.92));
 await writeFile("public/icon-192.png", await round(192));
 await writeFile("public/icon-512.png", await sharp(LOGO).resize(512, 512).png().toBuffer());
 await writeFile("public/icon-maskable-512.png", await square(512, 0.8));
+// small, pre-sized logo for the header (3x of 56px): served as-is so it paints instantly
+await writeFile("public/images/cafe-nu-logo-168.png", await sharp(LOGO).resize(168, 168).png({ compressionLevel: 9 }).toBuffer());
 console.log("icons generated");

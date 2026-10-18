@@ -45,12 +45,12 @@ export function MenuBoard() {
   );
 
   return (
-    <section id="menu" ref={root} aria-labelledby="menu-title" className="relative bg-cream py-28">
-      <div className="mx-auto max-w-7xl px-4 sm:px-8">
+    <section id="menu" ref={root} aria-labelledby="menu-title" className="relative bg-cream py-24 md:py-32">
+      <div className="mx-auto max-w-7xl px-5 md:px-8">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <p className="eyebrow mb-5">The menu</p>
-            <h2 id="menu-title" className="font-display text-[clamp(2.6rem,6vw,5rem)] font-medium leading-[0.95] text-ink">
+            <h2 id="menu-title" className="h2 text-ink">
               Coffee, brunch &amp; plates
             </h2>
             <p className="mt-4 max-w-xl text-lg text-muted">
