@@ -16,10 +16,11 @@ export function MobileActions() {
     });
     if (footer) io.observe(footer);
     function update() {
-      const on = window.scrollY > window.innerHeight * 0.6 && !footerVisible;
-      setShow(on);
-      // lets the floating WhatsApp launcher step aside on phones (the bar already has WhatsApp)
-      document.documentElement.dataset.quickbar = on ? "on" : "off";
+      const past = window.scrollY > window.innerHeight * 0.6;
+      setShow(past && !footerVisible);
+      // Phones: past the hero the floating WhatsApp launcher steps aside, since the bar (and then the
+      // footer) already offer WhatsApp and the launcher would cover content.
+      document.documentElement.dataset.quickbar = past ? "on" : "off";
     }
     update();
     window.addEventListener("scroll", update, { passive: true });
@@ -33,7 +34,7 @@ export function MobileActions() {
     telHref && { href: telHref, label: "Call", Icon: PhoneIcon, external: false },
     whatsappHref && { href: whatsappHref, label: "WhatsApp", Icon: WhatsAppIcon, external: true },
     { href: site.directionsUrl, label: "Directions", Icon: DirectionsIcon, external: true },
-    { href: "#menu", label: "Menu", Icon: MenuBookIcon, external: false },
+    { href: "/menu", label: "Menu", Icon: MenuBookIcon, external: false },
   ].filter(Boolean) as { href: string; label: string; Icon: typeof PhoneIcon; external: boolean }[];
 
   return (

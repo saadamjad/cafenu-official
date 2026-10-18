@@ -20,7 +20,7 @@ export function JsonLd() {
     servesCuisine: ["Coffee", "Cafe", "Breakfast", "Italian", "Pakistani", "Continental"],
     priceRange: `Rs ${priceRange.min}–${priceRange.max}`,
     currenciesAccepted: site.currency,
-    hasMenu: { "@id": `${site.url}/#menu` },
+    hasMenu: { "@id": `${site.url}/menu#menu` },
   };
   if (site.address)
     business.address = {
@@ -46,9 +46,9 @@ export function JsonLd() {
   const menuLd = {
     "@context": "https://schema.org",
     "@type": "Menu",
-    "@id": `${site.url}/#menu`,
+    "@id": `${site.url}/menu#menu`,
     name: `${site.name} Menu`,
-    url: `${site.url}/#menu`,
+    url: `${site.url}/menu`,
     inLanguage: "en",
     hasMenuSection: menu.map((c) => ({
       "@type": "MenuSection",

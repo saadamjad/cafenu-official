@@ -22,7 +22,7 @@ const drinks = [
 function Card({ d }: { d: (typeof drinks)[number] }) {
   const [flipped, setFlipped] = useState(false);
   return (
-    <li data-drink className="flip h-72" data-flipped={flipped}>
+    <li data-drink className="flip h-60 w-[68vw] max-w-72 shrink-0 snap-start sm:h-72 sm:w-auto sm:max-w-none" data-flipped={flipped}>
       <button
         type="button"
         onClick={() => setFlipped((f) => !f)}
@@ -77,14 +77,14 @@ export function Drinks() {
           Espresso, iced matcha &amp; frappés
         </h2>
         <p className="lead mt-5">Our most-ordered cups, from the espresso bar to the blender.</p>
-        <p className="label mt-6" aria-hidden="true">Tap a card to flip</p>
-        <ul data-drink-grid className="mt-8 grid grid-cols-1 gap-6 [perspective:1200px] sm:grid-cols-2 lg:grid-cols-4">
+        <p className="label mt-6" aria-hidden="true"><span className="sm:hidden">Swipe, then tap a card to flip</span><span className="hidden sm:inline">Tap a card to flip</span></p>
+        <ul data-drink-grid className="-mx-5 mt-8 flex snap-x snap-mandatory scroll-px-5 gap-4 overflow-x-auto overscroll-x-contain px-5 pb-4 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:px-0 sm:pb-0 sm:[perspective:1200px] lg:grid-cols-4">
           {drinks.map((d) => (
             <Card key={d.name} d={d} />
           ))}
         </ul>
         <p className="mt-10">
-          <a href="#menu-hot-coffee" className="font-semibold text-gold-deep underline decoration-2 underline-offset-4">
+          <a href="/menu#menu-hot-coffee" className="inline-flex min-h-11 items-center font-semibold text-gold-deep underline decoration-2 underline-offset-4">
             See every coffee, tea and mocktail on the menu
           </a>
         </p>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { formatTime, site, telHref, whatsappHref } from "@/content/site";
 import { SocialLinks } from "@/components/SocialLinks";
 
@@ -8,7 +9,7 @@ async function Year() {
 }
 
 const heading = "label !text-gold";
-const link = "text-cream/75 transition-colors hover:text-gold";
+const link = "inline-flex min-h-10 items-center text-cream/75 transition-colors hover:text-gold";
 
 export function Footer() {
   const a = site.address;
@@ -18,7 +19,7 @@ export function Footer() {
       <div className="tiles h-5 opacity-25" aria-hidden="true" />
       <div className="mx-auto grid max-w-7xl gap-12 px-5 py-16 md:grid-cols-2 md:px-8 lg:grid-cols-[1.3fr_1fr_1fr_1fr] lg:py-20">
         <div>
-          <a href="#top" aria-label="Cafe Nu, back to top" className="group inline-block">
+          <Link href="/#top" aria-label="Cafe Nu, back to top" className="group inline-block">
             <Image
               src="/images/cafe-nu-logo.png"
               alt="Cafe Nu"
@@ -26,7 +27,7 @@ export function Footer() {
               height={112}
               className="h-28 w-28 transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:rotate-[12deg]"
             />
-          </a>
+          </Link>
           <p className="mt-5 max-w-xs leading-relaxed text-cream/65">
             {site.tagline} in DHA Phase 2, Karachi. Handcrafted coffee and all-day dining.
           </p>
@@ -56,7 +57,7 @@ export function Footer() {
               {formatTime(h.opens)} – {formatTime(h.closes)}
             </p>
           )}
-          <ul className="mt-4 space-y-2">
+          <ul className="mt-3">
             {telHref && (
               <li>
                 <a className={link} href={telHref}>
@@ -76,12 +77,12 @@ export function Footer() {
 
         <nav aria-label="Footer">
           <h2 className={heading}>Explore</h2>
-          <ul className="mt-4 space-y-2">
-            <li><a className={link} href="#about">About</a></li>
-            <li><a className={link} href="#menu">Menu</a></li>
-            <li><a className={link} href="#drinks">Coffee &amp; matcha</a></li>
-            <li><a className={link} href="#reviews">Reviews</a></li>
-            <li><a className={link} href="#gallery">Gallery</a></li>
+          <ul className="mt-3">
+            <li><Link className={link} href="/#about">About</Link></li>
+            <li><Link className={link} href="/menu">Menu</Link></li>
+            <li><Link className={link} href="/#drinks">Coffee &amp; matcha</Link></li>
+            <li><Link className={link} href="/#reviews">Reviews</Link></li>
+            <li><Link className={link} href="/#gallery">Gallery</Link></li>
             <li><a className={link} href="/cafe-nu-menu.pdf" download>Download PDF menu</a></li>
           </ul>
         </nav>
@@ -91,9 +92,9 @@ export function Footer() {
           <p>
             © <Year /> {site.name}. All rights reserved.
           </p>
-          <a href="#top" className="transition-colors hover:text-gold">
+          <Link href="/#top" className="inline-flex min-h-10 items-center transition-colors hover:text-gold">
             Back to top ↑
-          </a>
+          </Link>
         </div>
       </div>
     </footer>

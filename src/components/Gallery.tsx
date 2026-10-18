@@ -92,17 +92,17 @@ export function Gallery() {
           </div>
         </div>
 
-        <ul className="columns-1 gap-6 sm:columns-2 [&>li]:mb-6">
+        <ul className="columns-2 gap-3 sm:gap-6 [&>li]:mb-3 sm:[&>li]:mb-6">
           {photos.map((p, i) => (
-            <li key={p.src} data-photo className={`relative break-inside-avoid overflow-hidden rounded-[2rem] ${p.tall ? "aspect-[2/3]" : "aspect-[4/3]"}`}>
+            <li key={p.src} data-photo className={`relative break-inside-avoid overflow-hidden rounded-2xl sm:rounded-[2rem] ${p.tall ? "aspect-[2/3]" : "aspect-[4/3]"}`}>
               <button
                 type="button"
                 onClick={() => openPhoto(i)}
                 aria-label={`View larger: ${p.alt}`}
-                className="group absolute inset-0 block h-full w-full cursor-zoom-in focus-visible:rounded-[2rem]!"
+                className="group absolute inset-0 block h-full w-full cursor-zoom-in focus-visible:rounded-2xl!"
               >
-                <Image src={p.src} alt={p.alt} fill quality={85} sizes="(min-width: 1024px) 26rem, (min-width: 640px) 50vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
-                <span className="absolute bottom-3 right-3 rounded-full bg-coal/70 px-3 py-1 text-xs font-medium text-cream backdrop-blur-sm" aria-hidden="true">
+                <Image src={p.src} alt={p.alt} fill quality={85} sizes="(min-width: 1024px) 26rem, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
+                <span className="absolute bottom-2 right-2 rounded-full bg-coal/70 px-2.5 py-1 text-xs sm:bottom-3 sm:right-3 sm:px-3 font-medium text-cream backdrop-blur-sm" aria-hidden="true">
                   Tap to enlarge
                 </span>
               </button>

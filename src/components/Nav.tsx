@@ -1,13 +1,14 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { site, telHref } from "@/content/site";
 import { DirectionsIcon, PhoneIcon } from "@/components/Icons";
 import { SocialLinks } from "@/components/SocialLinks";
 
 const links = [
   { href: "#about", label: "About" },
-  { href: "#menu", label: "Menu" },
+  { href: "/menu", label: "Menu" },
   { href: "#drinks", label: "Coffee & Matcha" },
   { href: "#reviews", label: "Reviews" },
   { href: "#gallery", label: "Gallery" },
@@ -20,6 +21,11 @@ export function Nav() {
   const [open, setOpen] = useState(false);
   const [progress, setProgress] = useState(0);
   const [active, setActive] = useState<string | null>(null);
+  const pathname = usePathname();
+  const home = pathname === "/";
+  // section anchors only exist on the home page; elsewhere they point back to it
+  const to = (href: string) => (href.startsWith("#") && !home ? `/${href}` : href);
+  const current = home ? active : pathname;
 
   useEffect(() => {
     let last = window.scrollY;
@@ -45,7 +51,7 @@ export function Nav() {
       (entries) => entries.forEach((e) => e.isIntersecting && setActive(`#${e.target.id}`)),
       { rootMargin: "-45% 0px -50% 0px" },
     );
-    ["top", ...links.map((l) => l.href.slice(1))].forEach((id) => {
+    ["top", ...links.filter((l) => l.href.startsWith("#")).map((l) => l.href.slice(1))].forEach((id) => {
       const el = document.getElementById(id);
       if (el) io.observe(el);
     });
@@ -66,7 +72,7 @@ export function Nav() {
       } ${solid || open ? "bg-coal/85 shadow-[0_1px_0_rgb(207_170_118/0.15)] backdrop-blur-xl" : ""}`}
     >
       <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between gap-6 px-5 md:px-8">
-        <a href="#top" className="group block shrink-0" aria-label="Cafe Nu home">
+        <a href={to("#top")} className="group block shrink-0" aria-label="Cafe Nu home">
           <Image
             src="/images/cafe-nu-logo-168.png"
             alt="Cafe Nu"
@@ -83,17 +89,17 @@ export function Nav() {
             {links.map((l) => (
               <li key={l.href}>
                 <a
-                  href={l.href}
-                  aria-current={active === l.href ? "true" : undefined}
+                  href={to(l.href)}
+                  aria-current={current === l.href ? "true" : undefined}
                   className={`relative rounded-full px-3.5 py-3 text-[0.92rem] font-medium transition-colors xl:px-4 ${
-                    active === l.href ? "text-gold" : "text-cream/80 hover:text-cream"
+                    current === l.href ? "text-gold" : "text-cream/80 hover:text-cream"
                   }`}
                 >
                   {l.label}
                   <span
                     aria-hidden="true"
                     className={`absolute inset-x-4 bottom-1.5 h-px origin-left bg-gold transition-transform duration-500 ${
-                      active === l.href ? "scale-x-100" : "scale-x-0"
+                      current === l.href ? "scale-x-100" : "scale-x-0"
                     }`}
                   />
                 </a>
@@ -146,7 +152,7 @@ export function Nav() {
           {links.map((l) => (
             <li key={l.href}>
               <a
-                href={l.href}
+                href={to(l.href)}
                 onClick={() => setOpen(false)}
                 tabIndex={open ? 0 : -1}
                 className="font-display block border-b border-white/10 py-3.5 text-2xl"

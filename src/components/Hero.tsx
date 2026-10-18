@@ -48,7 +48,7 @@ export function Hero() {
               Handcrafted coffee, fresh-baked bread and all-day dining in DHA Phase 2, Karachi.
             </p>
             <div className="fade-up mt-10 flex flex-wrap gap-4" style={{ ["--d" as string]: "1s" }}>
-              <MagneticButton href="#menu">View the menu</MagneticButton>
+              <MagneticButton href="/menu">View the menu</MagneticButton>
               <MagneticButton href={site.directionsUrl} variant="ghost" external>
                 <DirectionsIcon /> Get directions
               </MagneticButton>

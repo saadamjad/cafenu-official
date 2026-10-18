@@ -30,7 +30,7 @@ export function InfoBar() {
               <div>
                 <p className="label label--light">Find us</p>
                 <p className="mt-1.5 font-medium">Old Sunset Blvd, DHA Phase 2, {a.locality}</p>
-                <a href={site.directionsUrl} target="_blank" rel="noopener" className="mt-1 inline-block text-sm text-gold underline-offset-4 hover:underline">
+                <a href={site.directionsUrl} target="_blank" rel="noopener" className="inline-flex min-h-10 items-center text-sm text-gold underline-offset-4 hover:underline">
                   Get directions →
                 </a>
               </div>
@@ -41,11 +41,11 @@ export function InfoBar() {
               <PhoneIcon className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
               <div>
                 <p className="label label--light">Call or message</p>
-                <a href={telHref} className="mt-1.5 block font-medium hover:text-gold">
+                <a href={telHref} className="mt-0.5 inline-flex min-h-10 items-center font-medium hover:text-gold">
                   {site.phoneDisplay}
                 </a>
                 {whatsappHref && (
-                  <a href={whatsappHref} target="_blank" rel="noopener" className="mt-1 inline-flex items-center gap-1.5 text-sm text-gold underline-offset-4 hover:underline">
+                  <a href={whatsappHref} target="_blank" rel="noopener" className="flex min-h-10 w-fit items-center gap-1.5 text-sm text-gold underline-offset-4 hover:underline">
                     <WhatsAppIcon className="h-4 w-4" /> WhatsApp us
                   </a>
                 )}

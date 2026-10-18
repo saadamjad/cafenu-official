@@ -4,7 +4,7 @@ import { Hero } from "@/components/Hero";
 import { InfoBar } from "@/components/InfoBar";
 import { About } from "@/components/About";
 import { Signatures } from "@/components/Signatures";
-import { MenuBoard } from "@/components/MenuBoard";
+import { MenuTeaser } from "@/components/MenuTeaser";
 import { Drinks } from "@/components/Drinks";
 import { Reviews } from "@/components/Reviews";
 import { Gallery } from "@/components/Gallery";
@@ -24,7 +24,7 @@ export default function Home() {
         <InfoBar />
         <About />
         <Signatures />
-        <MenuBoard />
+        <MenuTeaser />
         <Drinks />
         <Reviews />
         <Gallery />
