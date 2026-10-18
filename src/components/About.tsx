@@ -67,14 +67,14 @@ export function About() {
               look after you. A warm room and quality service make every visit feel special.
             </p>
           </div>
-          <ul data-line className="mt-10 grid grid-cols-3 gap-4 border-t border-line pt-8">
+          <ul data-line className="mt-10 grid grid-cols-3 gap-3 border-t border-line pt-8 sm:gap-4">
             {[
-              ["Handcrafted", "coffee & matcha"],
+              ["Hand\u00ADcrafted", "coffee & matcha"],
               ["Baked", "in-house breads"],
               ["All-day", "breakfast & plates"],
             ].map(([a, b]) => (
               <li key={a}>
-                <p className="font-display text-2xl text-ink md:text-3xl">{a}</p>
+                <p className="font-display text-xl leading-tight text-ink sm:text-2xl md:text-3xl">{a}</p>
                 <p className="mt-1 text-sm text-muted">{b}</p>
               </li>
             ))}
