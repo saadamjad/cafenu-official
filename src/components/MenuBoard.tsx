@@ -45,7 +45,7 @@ export function MenuBoard() {
   );
 
   return (
-    <section id="menu" ref={root} aria-labelledby="menu-title" className="relative bg-cream py-24 md:py-32">
+    <section id="menu" ref={root} aria-labelledby="menu-title" className="relative bg-cream py-16 sm:py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
@@ -67,7 +67,7 @@ export function MenuBoard() {
           </a>
         </div>
 
-        <nav aria-label="Menu categories" className="sticky top-0 z-30 -mx-4 mt-12 bg-cream/90 px-4 py-3 backdrop-blur-md sm:-mx-8 sm:px-8">
+        <nav aria-label="Menu categories" className="menu-pills sticky top-0 z-30 -mx-4 mt-12 bg-cream/90 px-4 py-3 backdrop-blur-md sm:-mx-8 sm:px-8">
           <div ref={pills} className="relative flex gap-2 overflow-x-auto [scrollbar-width:none]">
             <span data-indicator aria-hidden="true" className="absolute left-0 top-0 h-full rounded-full bg-ink" style={{ width: 0 }} />
             {menu.map((c) => (

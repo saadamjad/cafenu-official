@@ -37,9 +37,9 @@ export function About() {
   );
 
   return (
-    <section id="about" ref={root} aria-labelledby="about-title" className="relative overflow-hidden bg-cream py-24 md:py-32 lg:flex lg:min-h-screen lg:items-center lg:py-0">
-      <div className="mx-auto grid max-w-7xl items-center gap-16 px-5 md:px-8 lg:grid-cols-2">
-        <div className="relative mx-auto h-[520px] w-full max-w-lg [perspective:1400px] lg:h-[640px]">
+    <section id="about" ref={root} aria-labelledby="about-title" className="relative overflow-hidden bg-cream py-16 sm:py-24 md:py-32 lg:flex lg:min-h-screen lg:items-center lg:py-0">
+      <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 md:gap-16 md:px-8 lg:grid-cols-2">
+        <div className="relative mx-auto h-[400px] w-full max-w-lg sm:h-[520px] [perspective:1400px] lg:h-[640px]">
           <div data-layer="back" className="tiles absolute left-[6%] top-[4%] h-[62%] w-[70%] rounded-3xl opacity-90 shadow-xl" />
           <div data-layer="mid" className="absolute right-0 top-[10%] h-[62%] w-[58%] overflow-hidden rounded-3xl shadow-2xl">
             <Image src="/images/cafe-nu-caesar-salad.jpg" alt="Caesar salad being finished with parmesan in front of Cafe Nu's teal velvet chairs" fill quality={85} sizes="(min-width: 1024px) 18rem, 55vw" className="object-cover" />

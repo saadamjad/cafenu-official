@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { ChevronIcon, CloseIcon } from "@/components/Icons";
 import { gsap, useGSAP, prefersReducedMotion } from "@/lib/gsap";
 
 const photos = [
@@ -9,11 +10,33 @@ const photos = [
   { src: "/images/cafe-nu-creamy-tuscan-chicken-pasta.jpg", alt: "Creamy Tuscan chicken pasta with garlic bread served over a checkered floor", tall: true },
   { src: "/images/cafe-nu-scrambled-egg-croissant.jpg", alt: "Scrambled eggs in a croissant with sausages and mixed salad", tall: true },
   { src: "/images/cafe-nu-caesar-salad.jpg", alt: "Caesar salad with grilled chicken and boiled egg on an oak table" },
+  { src: "/images/cafe-nu-pizza-pasta-sandwich-spread.jpg", alt: "Pepperoni pizza, penne pasta, a toasted sandwich with fries and a blue mojito on a sunny lounge table", tall: true },
+  { src: "/images/cafe-nu-iced-frappe.jpg", alt: "Iced coffee frappé topped with whipped cream beside scattered coffee beans in morning sun", tall: true },
+  { src: "/images/cafe-nu-club-sandwich-dining-room.jpg", alt: "Club sandwich with fries and a blue mojito at a table inside the Cafe Nu dining room" },
 ];
 
 export function Gallery() {
   const root = useRef<HTMLElement>(null);
   const video = useRef<HTMLVideoElement>(null);
+  const dialog = useRef<HTMLDialogElement>(null);
+  const [current, setCurrent] = useState<number | null>(null);
+
+  const openPhoto = (i: number) => {
+    setCurrent(i);
+    dialog.current?.showModal();
+  };
+  const step = (dir: number) => setCurrent((c) => (c === null ? c : (c + dir + photos.length) % photos.length));
+
+  // Arrow keys page through the lightbox; Escape is handled natively by <dialog>.
+  useEffect(() => {
+    if (current === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") step(1);
+      if (e.key === "ArrowLeft") step(-1);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [current]);
 
   // Play the reel only while it is on screen.
   useEffect(() => {
@@ -44,7 +67,7 @@ export function Gallery() {
   );
 
   return (
-    <section id="gallery" ref={root} aria-labelledby="gallery-title" className="relative overflow-hidden bg-coal py-24 md:py-32 text-cream">
+    <section id="gallery" ref={root} aria-labelledby="gallery-title" className="relative overflow-hidden bg-coal py-16 sm:py-24 md:py-32 text-cream">
       <div className="mx-auto grid max-w-7xl gap-16 px-5 md:px-8 lg:grid-cols-[0.8fr_1.2fr]">
         <div className="lg:sticky lg:top-24 lg:self-start">
           <p className="eyebrow eyebrow--light mb-5">Gallery &amp; reels</p>
@@ -70,13 +93,51 @@ export function Gallery() {
         </div>
 
         <ul className="columns-1 gap-6 sm:columns-2 [&>li]:mb-6">
-          {photos.map((p) => (
+          {photos.map((p, i) => (
             <li key={p.src} data-photo className={`relative break-inside-avoid overflow-hidden rounded-[2rem] ${p.tall ? "aspect-[2/3]" : "aspect-[4/3]"}`}>
-              <Image src={p.src} alt={p.alt} fill quality={85} sizes="(min-width: 1024px) 22rem, (min-width: 640px) 45vw, 92vw" className="object-cover" />
+              <button
+                type="button"
+                onClick={() => openPhoto(i)}
+                aria-label={`View larger: ${p.alt}`}
+                className="group absolute inset-0 block h-full w-full cursor-zoom-in focus-visible:rounded-[2rem]!"
+              >
+                <Image src={p.src} alt={p.alt} fill quality={85} sizes="(min-width: 1024px) 26rem, (min-width: 640px) 50vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
+                <span className="absolute bottom-3 right-3 rounded-full bg-coal/70 px-3 py-1 text-xs font-medium text-cream backdrop-blur-sm" aria-hidden="true">
+                  Tap to enlarge
+                </span>
+              </button>
             </li>
           ))}
         </ul>
       </div>
+
+      <dialog
+        ref={dialog}
+        onClose={() => setCurrent(null)}
+        onClick={(e) => e.target === e.currentTarget && dialog.current?.close()}
+        aria-label="Photo viewer"
+        className="m-0 h-[100dvh] max-h-none w-screen max-w-none bg-coal/95 p-0 text-cream backdrop:bg-black/80"
+      >
+        {current !== null && (
+          <figure className="pointer-events-none flex h-full flex-col items-center justify-center gap-3 px-3 py-16 md:px-20">
+            <div className="relative h-full w-full">
+              <Image key={photos[current].src} src={photos[current].src} alt={photos[current].alt} fill quality={85} sizes="100vw" className="object-contain" />
+            </div>
+            <figcaption className="max-w-2xl text-center text-sm text-cream/75">
+              {photos[current].alt} <span className="text-cream/45">· {current + 1}/{photos.length}</span>
+            </figcaption>
+          </figure>
+        )}
+        <button type="button" onClick={() => dialog.current?.close()} aria-label="Close photo" className="absolute right-3 top-3 grid h-12 w-12 place-items-center rounded-full bg-white/10 hover:bg-white/20 focus-visible:rounded-full!">
+          <CloseIcon />
+        </button>
+        <button type="button" onClick={() => step(-1)} aria-label="Previous photo" className="absolute left-2 top-1/2 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/10 hover:bg-white/20 focus-visible:rounded-full! md:left-5">
+          <ChevronIcon className="h-6 w-6 rotate-180" />
+        </button>
+        <button type="button" onClick={() => step(1)} aria-label="Next photo" className="absolute right-2 top-1/2 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/10 hover:bg-white/20 focus-visible:rounded-full! md:right-5">
+          <ChevronIcon className="h-6 w-6" />
+        </button>
+      </dialog>
     </section>
   );
 }

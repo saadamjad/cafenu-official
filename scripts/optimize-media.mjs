@@ -26,6 +26,25 @@ for (const [file, slug] of Object.entries(photos)) {
   console.log("✓", slug);
 }
 
+// Phone shots / promo posts (already ~1320px wide): keep full native resolution, light compression.
+const phonePhotos = {
+  "IMG_2735.jpg": "cafe-nu-club-sandwich-dining-room",
+  "IMG_2736.jpg": "cafe-nu-iced-frappe",
+  "IMG_2738.jpg": "cafe-nu-pizza-pasta-sandwich-spread",
+};
+for (const [file, slug] of Object.entries(phonePhotos)) {
+  await sharp(path.join(SRC, file)).rotate().jpeg({ quality: 90, mozjpeg: true }).toFile(`${OUT}/${slug}.jpg`);
+  console.log("✓", slug);
+}
+// Bruschetta poster: crop off the printed title/description so the card caption isn't duplicated.
+{
+  const file = path.join(SRC, "IMG_2737.jpg");
+  const { width, height } = await sharp(file).metadata();
+  const top = Math.round(height * 0.44);
+  await sharp(file).rotate().extract({ left: 0, top, width, height: height - top }).jpeg({ quality: 90, mozjpeg: true }).toFile(`${OUT}/cafe-nu-rustic-chicken-bruschetta.jpg`);
+  console.log("✓ cafe-nu-rustic-chicken-bruschetta");
+}
+
 // Logo: mask the round badge onto a transparent background
 const LOGO = path.join(SRC, "828554365_122102163111491872_8835121402564258197_n.jpg");
 const size = 480;

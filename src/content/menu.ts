@@ -44,7 +44,12 @@ export const menu: MenuCategory[] = [
     kind: "food",
     items: [
       { name: "Rustic Beef Bruschetta", price: 1650, description: "Rustic croissant slice topped with tender beef slices, Dijon mayo, parmesan and pickled cucumber." },
-      { name: "Rustic Chicken Bruschetta", price: 1550, description: "Rustic croissant slice topped with tender buttery chicken, Dijon mayo, parmesan and pickled cucumber." },
+      {
+        name: "Rustic Chicken Bruschetta",
+        price: 1550,
+        description: "Rustic croissant slice topped with tender buttery chicken, Dijon mayo, parmesan and pickled cucumber.",
+        image: "/images/cafe-nu-rustic-chicken-bruschetta.jpg",
+      },
       { name: "Almond Crust Chicken Strips with Fries", price: 1245, description: "Panko-fried, almond-crusted chicken strips with honey mustard mayo, served with French fries." },
       { name: "Potato Wedges", price: 450, description: "Premium potato wedges, lightly seasoned, served with your choice of dip." },
       { name: "Loaded Fries", price: 1100, description: "Crispy fries topped with melted cheese, grilled chicken chunks, in-house sauce, black olives and a jalapeño drizzle." },

@@ -6,6 +6,8 @@ import { formatPrice, menu } from "@/content/menu";
 
 const dishes = menu.flatMap((c) => c.items.filter((i) => i.image).map((i) => ({ ...i, category: c.title })));
 
+const numberWord = (n: number) => ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"][n] ?? String(n);
+
 // Vertical scroll drives a horizontal 3D carousel; cards rotate by distance from centre.
 export function Signatures() {
   const root = useRef<HTMLElement>(null);
@@ -51,40 +53,17 @@ export function Signatures() {
           ),
         );
       });
-      // phones: native swipe + a coverflow tilt driven by the horizontal scroll position
+      // phones: plain native swipe. No 3D transforms here: preserve-3d/rotateY on a
+      // scroll container breaks touch scrolling and hit-testing in iOS Safari.
       mm.add("(max-width: 767px)", () => {
-        const track = root.current!.querySelector<HTMLElement>("[data-track]")!;
-        const cards = gsap.utils.toArray<HTMLElement>("[data-card]");
-        const setters = cards.map((c) => ({
-          ry: gsap.quickTo(c, "rotateY", { duration: 0.5 }),
-          sc: gsap.quickTo(c, "scale", { duration: 0.5 }),
-        }));
-        let frame = 0;
-        const update = () => {
-          frame = 0;
-          const mid = track.scrollLeft + track.clientWidth / 2;
-          cards.forEach((c, i) => {
-            const d = gsap.utils.clamp(-1, 1, (c.offsetLeft + c.offsetWidth / 2 - mid) / track.clientWidth);
-            setters[i].ry(d * -30);
-            setters[i].sc(1 - Math.abs(d) * 0.12);
-          });
-        };
-        const onScroll = () => (frame ||= requestAnimationFrame(update));
-        track.addEventListener("scroll", onScroll, { passive: true });
-        update();
-        gsap.from(cards, {
-          y: 60,
+        gsap.from(gsap.utils.toArray<HTMLElement>("[data-card]"), {
+          y: 40,
           opacity: 0,
-          rotateX: -20,
-          stagger: 0.08,
-          duration: 1.2,
+          stagger: 0.06,
+          duration: 0.9,
           ease: "expo.out",
-          scrollTrigger: { trigger: track, start: "top 85%" },
+          scrollTrigger: { trigger: root.current!.querySelector("[data-track]"), start: "top 90%" },
         });
-        return () => {
-          track.removeEventListener("scroll", onScroll);
-          cancelAnimationFrame(frame);
-        };
       });
     },
     { scope: root },
@@ -105,26 +84,26 @@ export function Signatures() {
     gsap.to(e.currentTarget.querySelector("[data-tilt]"), { rotateY: 0, rotateX: 0, duration: 0.8, ease: "elastic.out(1,0.5)" });
 
   return (
-    <section id="signatures" ref={root} aria-labelledby="sig-title" className="relative overflow-hidden bg-ink py-24 text-cream md:flex md:h-screen md:flex-col md:justify-center md:py-0">
-      <div className="mx-auto mb-12 w-full max-w-7xl px-5 md:px-8">
+    <section id="signatures" ref={root} aria-labelledby="sig-title" className="relative overflow-hidden bg-ink py-16 text-cream sm:py-24 md:flex md:h-screen md:flex-col md:justify-center md:py-0">
+      <div className="mx-auto mb-8 w-full max-w-7xl md:mb-12 px-5 md:px-8">
         <p className="eyebrow eyebrow--light mb-5">Signature plates</p>
         <h2 id="sig-title" className="h2 max-w-3xl">
-          Five plates from our kitchen.
+          {numberWord(dishes.length)} plates from our kitchen.
         </h2>
       </div>
 
       <ul
         data-track
-        className="flex snap-x snap-mandatory gap-6 overflow-x-auto px-4 pb-6 [perspective:1600px] [transform-style:preserve-3d] sm:px-8 md:w-max md:snap-none md:overflow-visible md:pl-[max(2rem,calc((100vw-80rem)/2+2rem))]"
+        className="flex touch-pan-x snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain scroll-px-5 px-5 pb-4 [-webkit-overflow-scrolling:touch] [scrollbar-width:none] sm:gap-6 sm:px-8 md:w-max md:touch-auto md:[perspective:1600px] md:[transform-style:preserve-3d] md:snap-none md:overflow-visible md:pl-[max(2rem,calc((100vw-80rem)/2+2rem))]"
       >
         {dishes.map((d) => (
-          <li key={d.name} data-card onPointerMove={onMove} onPointerLeave={onLeave} className="w-[78vw] shrink-0 snap-center sm:w-[22rem]">
-            <article data-tilt className="group relative overflow-hidden ring-logo rounded-[2rem] bg-coal [transform-style:preserve-3d]">
+          <li key={d.name} data-card onPointerMove={onMove} onPointerLeave={onLeave} className="w-[80vw] max-w-[22rem] shrink-0 snap-start sm:w-[22rem]">
+            <article data-tilt className="group relative overflow-hidden ring-logo rounded-[2rem] bg-coal md:[transform-style:preserve-3d]">
               <div data-img className="relative aspect-[4/5]">
                 <Image src={d.image!} alt={d.name} fill quality={85} sizes="(min-width: 640px) 22rem, 78vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
               </div>
               <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 [background:radial-gradient(circle_at_var(--gx,50%)_var(--gy,50%),rgba(255,255,255,0.25),transparent_45%)]" />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-coal via-coal/85 to-transparent p-6 pt-20">
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-coal via-coal/85 to-transparent p-5 pt-16 sm:p-6 sm:pt-20">
                 <p className="text-[0.7rem] font-semibold uppercase tracking-[0.25em] text-gold">{d.category}</p>
                 <h3 className="font-display mt-2 text-2xl font-medium leading-tight">{d.name}</h3>
                 <p className="mt-2 line-clamp-2 text-sm text-cream/75">{d.description}</p>
@@ -134,6 +113,9 @@ export function Signatures() {
           </li>
         ))}
       </ul>
+      <p className="mt-2 px-5 text-xs uppercase tracking-[0.2em] text-cream/50 md:hidden" aria-hidden="true">
+        Swipe to see more →
+      </p>
     </section>
   );
 }

@@ -258,6 +258,27 @@ body {
 .flip:hover .flip__liquid,
 .flip[data-flipped="true"] .flip__liquid { height: 78%; }
 
+/* Phones: the bottom quick-actions bar already offers WhatsApp, so the floating launcher steps aside. */
+.wa-widget {
+  transition: opacity 0.4s var(--ease-out), visibility 0.4s;
+}
+@media (max-width: 767px) {
+  html[data-quickbar="on"] .wa-widget {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+/* Menu category pills sit below the fixed nav while it is showing. */
+.menu-pills {
+  top: 76px;
+  transition: top 0.7s var(--ease-out);
+}
+html[data-nav="hidden"] .menu-pills {
+  top: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

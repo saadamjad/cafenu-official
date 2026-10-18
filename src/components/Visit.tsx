@@ -12,7 +12,7 @@ export function Visit() {
   const hoursFor = (d: string) => site.hours.find((h) => h.dayCodes.includes(d));
 
   return (
-    <section id="visit" aria-labelledby="visit-title" className="relative overflow-hidden bg-gold py-24 md:py-32 text-ink">
+    <section id="visit" aria-labelledby="visit-title" className="relative overflow-hidden bg-gold py-16 sm:py-24 md:py-32 text-ink">
       <div className="mx-auto grid max-w-7xl gap-12 px-5 md:px-8 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
         <div>
           <p className="eyebrow mb-5 !text-ink/80">Visit us</p>

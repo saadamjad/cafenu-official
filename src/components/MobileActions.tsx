@@ -16,7 +16,10 @@ export function MobileActions() {
     });
     if (footer) io.observe(footer);
     function update() {
-      setShow(window.scrollY > window.innerHeight * 0.6 && !footerVisible);
+      const on = window.scrollY > window.innerHeight * 0.6 && !footerVisible;
+      setShow(on);
+      // lets the floating WhatsApp launcher step aside on phones (the bar already has WhatsApp)
+      document.documentElement.dataset.quickbar = on ? "on" : "off";
     }
     update();
     window.addEventListener("scroll", update, { passive: true });

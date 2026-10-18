@@ -25,7 +25,10 @@ export function Nav() {
     let last = window.scrollY;
     const onScroll = () => {
       const y = window.scrollY;
-      setHidden(y > last && y > 400);
+      const hide = y > last && y > 400;
+      setHidden(hide);
+      // sticky bars below the nav (menu category pills) read this to sit flush or under the nav
+      document.documentElement.dataset.nav = hide ? "hidden" : "shown";
       setSolid(y > 40);
       const max = document.documentElement.scrollHeight - window.innerHeight;
       setProgress(max > 0 ? y / max : 0);

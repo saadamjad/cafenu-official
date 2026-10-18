@@ -72,7 +72,7 @@ export function Drinks() {
   );
 
   return (
-    <section id="drinks" ref={root} aria-labelledby="drinks-title" className="relative overflow-hidden bg-[#efe6d6] py-24 md:py-32">
+    <section id="drinks" ref={root} aria-labelledby="drinks-title" className="relative overflow-hidden bg-[#efe6d6] py-16 sm:py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <p className="eyebrow mb-5">The bar</p>
         <h2 id="drinks-title" className="h2 max-w-3xl text-ink">
