@@ -38,7 +38,8 @@ Use the shared classes instead of one-off sizes.
 ## Content
 - Max two short paragraphs per section; say each fact once on the page.
 - UI instructions are a `.label`, not a sentence.
-- Long lists (the menu) show one group at a time; never dump everything at once.
+- Keep the home page short: it leads to reviews and photos. Long content gets its own page (the full menu lives on `/menu`; home shows only `MenuTeaser`).
+- Phones: long card sets become a swipe row or a 2-column grid, never a long single column. Tap targets at least 40px tall.
 - Never remove prices, hours, address, phone or WhatsApp. Business details come from `src/content/site.ts`, the menu from `src/content/menu.ts`.
 
 ## Motion
@@ -54,5 +55,5 @@ Use the shared classes instead of one-off sizes.
 
 ## Before deploying
 1. `npm run typecheck && npm run lint && npm run build`
-2. `npm start` and check at 375px and 1440px widths.
+2. `npm start` and check `/` and `/menu` at 375px and 1440px widths.
 3. Turn on "reduce motion" in the OS and check the page still reads well.
