@@ -46,3 +46,8 @@ export const StarIcon = ({ className = "h-4 w-4", filled = 1 }: P & { filled?: n
     <path fill={`url(#star-${filled})`} d="m12 2.8 2.8 5.8 6.3.9-4.6 4.4 1.1 6.3L12 17.2 6.4 20.2l1.1-6.3L2.9 9.5l6.3-.9z" />
   </svg>
 );
+export const CloseIcon = ({ className = "h-5 w-5" }: P) => (
+  <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...base}>
+    <path d="M6 6l12 12M18 6 6 18" />
+  </svg>
+);

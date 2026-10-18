@@ -53,6 +53,19 @@ export const sameAs = Object.values(site.socials).filter((v): v is string => Boo
 export const telHref = site.phone ? `tel:${site.phone}` : null;
 export const whatsappHref = site.whatsapp ? `https://wa.me/${site.whatsapp}` : null;
 
+/** Prefilled questions for the floating WhatsApp widget. Keep them to facts the site already states. */
+export const whatsappMessages = [
+  "Hi! Could you share your menu?",
+  "What time are you open today?",
+  "How do I find you in DHA Phase 2?",
+  "Can I book a table?",
+  "I have a question about your food & drinks.",
+];
+
+/** wa.me click-to-chat link with a prefilled message. */
+export const whatsappChatHref = (text: string) =>
+  site.whatsapp ? `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(text)}` : null;
+
 /** "08:00" -> "8 am", "23:00" -> "11 pm" */
 export function formatTime(hhmm: string) {
   const [h, m] = hhmm.split(":").map(Number);

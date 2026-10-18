@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Outfit, Playfair_Display } from "next/font/google";
 import { buildMetadata } from "@/lib/seo";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { WhatsAppWidget } from "@/components/WhatsAppWidget";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -34,6 +35,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </a>
         <SmoothScroll />
         {children}
+        <WhatsAppWidget />
         <div className="grain" aria-hidden="true" />
       </body>
     </html>
