@@ -22,6 +22,8 @@ export const site = {
   locale: "en_PK",
   currency: "PKR",
   timeZone: "Asia/Karachi",
+  /** Last real content change (menu, prices, hours). Used as sitemap lastmod, so bump it by hand. */
+  contentUpdated: "2026-10-19",
 
   city: "Karachi" as string | null,
   address: address as null | typeof address,

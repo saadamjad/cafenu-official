@@ -100,7 +100,7 @@ export function Signatures() {
           <li key={d.name} data-card onPointerMove={onMove} onPointerLeave={onLeave} className="w-[80vw] max-w-[22rem] shrink-0 snap-start sm:w-[22rem]">
             <article data-tilt className="group relative overflow-hidden ring-logo rounded-[2rem] bg-coal md:[transform-style:preserve-3d]">
               <div data-img className="relative aspect-[4/5]">
-                <Image src={d.image!} alt={d.name} fill quality={85} sizes="(min-width: 640px) 22rem, 78vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                <Image src={d.image!} alt={`${d.name} at Cafe Nu`} fill quality={85} sizes="(min-width: 640px) 22rem, 78vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
               </div>
               <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 [background:radial-gradient(circle_at_var(--gx,50%)_var(--gy,50%),rgba(255,255,255,0.25),transparent_45%)]" />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-coal via-coal/85 to-transparent p-6 pt-16 sm:p-7 sm:pt-20">

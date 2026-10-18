@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { site } from "@/content/site";
 
-export const metadata: Metadata = { title: "Page not found | Cafe Nu" };
+export const metadata: Metadata = { title: `Page not found | ${site.name}` };
 
 export default function NotFound() {
   return (

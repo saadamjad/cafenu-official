@@ -11,12 +11,12 @@ import { Gallery } from "@/components/Gallery";
 import { Visit } from "@/components/Visit";
 import { Footer } from "@/components/Footer";
 import { MobileActions } from "@/components/MobileActions";
-import { JsonLd } from "@/components/JsonLd";
+import { SiteJsonLd } from "@/components/JsonLd";
 
 export default function Home() {
   return (
     <>
-      <JsonLd />
+      <SiteJsonLd />
       <Preloader />
       <Nav />
       <main id="main">

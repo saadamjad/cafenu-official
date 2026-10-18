@@ -1,9 +1,20 @@
 import { menu, priceRange } from "@/content/menu";
 import { sameAs, site } from "@/content/site";
 
-// Only fields backed by real data are emitted; null TODOs in site.ts are skipped.
-export function JsonLd() {
-  const abs = (p: string) => new URL(p, site.url).toString();
+const abs = (p: string) => new URL(p, site.url).toString();
+
+function LdScript({ data }: { data: unknown }) {
+  return (
+    <script
+      type="application/ld+json"
+      // Escape "<" so menu text can never close the script tag.
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\u003c") }}
+    />
+  );
+}
+
+// Home page: the cafe itself + the website. Only fields backed by real data are emitted; null TODOs in site.ts are skipped.
+export function SiteJsonLd() {
   const business: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "CafeOrCoffeeShop",
@@ -43,6 +54,21 @@ export function JsonLd() {
     }));
   if (sameAs.length) business.sameAs = sameAs;
 
+  const website = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${site.url}/#website`,
+    name: site.name,
+    url: site.url,
+    inLanguage: "en",
+    publisher: { "@id": `${site.url}/#cafe` },
+  };
+
+  return <LdScript data={[business, website]} />;
+}
+
+// Menu page: the priced menu (what /menu actually shows) + its breadcrumb.
+export function MenuJsonLd() {
   const menuLd = {
     "@context": "https://schema.org",
     "@type": "Menu",
@@ -50,6 +76,7 @@ export function JsonLd() {
     name: `${site.name} Menu`,
     url: `${site.url}/menu`,
     inLanguage: "en",
+    provider: { "@id": `${site.url}/#cafe` },
     hasMenuSection: menu.map((c) => ({
       "@type": "MenuSection",
       name: c.title,
@@ -63,21 +90,14 @@ export function JsonLd() {
     })),
   };
 
-  const website = {
+  const breadcrumb = {
     "@context": "https://schema.org",
-    "@type": "WebSite",
-    "@id": `${site.url}/#website`,
-    name: site.name,
-    url: site.url,
-    inLanguage: "en",
-    publisher: { "@id": `${site.url}/#cafe` },
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: site.name, item: `${site.url}/` },
+      { "@type": "ListItem", position: 2, name: "Menu", item: `${site.url}/menu` },
+    ],
   };
 
-  return (
-    <script
-      type="application/ld+json"
-      // Escape "<" so menu text can never close the script tag.
-      dangerouslySetInnerHTML={{ __html: JSON.stringify([business, menuLd, website]).replace(/</g, "\\u003c") }}
-    />
-  );
+  return <LdScript data={[menuLd, breadcrumb]} />;
 }
