@@ -67,10 +67,10 @@ export function Gallery() {
   );
 
   return (
-    <section id="gallery" ref={root} aria-labelledby="gallery-title" className="relative overflow-hidden bg-coal py-16 sm:py-24 md:py-32 text-cream">
+    <section id="gallery" ref={root} aria-labelledby="gallery-title" className="relative overflow-hidden bg-coal py-20 md:py-28 text-cream">
       <div className="mx-auto grid max-w-7xl gap-16 px-5 md:px-8 lg:grid-cols-[0.8fr_1.2fr]">
         <div className="lg:sticky lg:top-24 lg:self-start">
-          <p className="eyebrow eyebrow--light mb-5">Gallery &amp; reels</p>
+          <p className="eyebrow eyebrow--light mb-4">Gallery &amp; reels</p>
           <h2 id="gallery-title" className="h2">
             Straight from our tables
           </h2>

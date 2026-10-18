@@ -36,11 +36,11 @@ function Card({ d }: { d: (typeof drinks)[number] }) {
               <path d="M0 10 Q25 0 50 10 T100 10 T150 10 T200 10 V20 H0Z" />
             </svg>
           </span>
-          <span className="relative text-xs font-semibold uppercase tracking-[0.25em] text-muted">{d.category}</span>
+          <span className="label relative">{d.category}</span>
           <span className="font-display relative text-3xl font-medium leading-tight text-ink">{d.name}</span>
         </span>
         <span className="flip__face flip__back flex flex-col justify-between rounded-3xl p-6 text-cream shadow-lg" style={{ background: d.color }}>
-          <span className="text-xs font-semibold uppercase tracking-[0.25em] opacity-80">{d.category}</span>
+          <span className="label !text-current opacity-80">{d.category}</span>
           <span>
             <span className="font-display block text-2xl font-medium">{d.name}</span>
             {d.note && <span className="mt-2 block text-sm opacity-85">{d.note}</span>}
@@ -59,11 +59,9 @@ export function Drinks() {
       if (prefersReducedMotion()) return;
       gsap.from("[data-drink]", {
         opacity: 0,
-        y: 80,
-        rotateX: -35,
-        transformOrigin: "50% 100%",
-        stagger: { each: 0.08, grid: "auto", from: "start" },
-        duration: 1,
+        y: 24,
+        stagger: 0.05,
+        duration: 0.9,
         ease: "expo.out",
         scrollTrigger: { trigger: "[data-drink-grid]", start: "top 80%" },
       });
@@ -72,16 +70,15 @@ export function Drinks() {
   );
 
   return (
-    <section id="drinks" ref={root} aria-labelledby="drinks-title" className="relative overflow-hidden bg-[#efe6d6] py-16 sm:py-24 md:py-32">
+    <section id="drinks" ref={root} aria-labelledby="drinks-title" className="relative overflow-hidden bg-[#efe6d6] py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
-        <p className="eyebrow mb-5">The bar</p>
+        <p className="eyebrow mb-4">The bar</p>
         <h2 id="drinks-title" className="h2 max-w-3xl text-ink">
           Espresso, iced matcha &amp; frappés
         </h2>
-        <p className="mt-4 max-w-xl text-lg text-muted">
-          Hover or tap a card to flip it. Hot coffees can be flavoured with hazelnut, vanilla or caramel.
-        </p>
-        <ul data-drink-grid className="mt-14 grid grid-cols-1 gap-6 [perspective:1200px] sm:grid-cols-2 lg:grid-cols-4">
+        <p className="lead mt-5">Our most-ordered cups, from the espresso bar to the blender.</p>
+        <p className="label mt-6" aria-hidden="true">Tap a card to flip</p>
+        <ul data-drink-grid className="mt-8 grid grid-cols-1 gap-6 [perspective:1200px] sm:grid-cols-2 lg:grid-cols-4">
           {drinks.map((d) => (
             <Card key={d.name} d={d} />
           ))}

@@ -18,7 +18,7 @@ function Stars({ value, className = "h-4 w-4" }: { value: number; className?: st
 function Attribution() {
   // Places API policy: Google Maps attribution must be visible with this content.
   return (
-    <p className="text-[13px] text-muted">
+    <p className="text-sm text-muted">
       Reviews from <span className="font-medium text-ink">Google Maps</span>, shown in Google&apos;s &ldquo;most relevant&rdquo; order.
     </p>
   );
@@ -53,11 +53,11 @@ export function Reviews() {
   const count = data ? data.count : googleRating.count;
 
   return (
-    <section id="reviews" ref={root} aria-labelledby="reviews-title" className="relative bg-cream py-16 sm:py-24 md:py-32">
+    <section id="reviews" ref={root} aria-labelledby="reviews-title" className="relative bg-cream py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <div className="flex flex-wrap items-end justify-between gap-8">
           <div>
-            <p className="eyebrow mb-5">Guest reviews</p>
+            <p className="eyebrow mb-4">Guest reviews</p>
             <h2 id="reviews-title" className="h2 text-ink">
               What our guests say
             </h2>
@@ -228,14 +228,14 @@ function CuratedReviews({ readUrl }: { readUrl: string }) {
                   <Stars value={r.rating} />
                   {ago && <span className="text-xs text-muted">{ago}</span>}
                   {isNew && (
-                    <span className="rounded-full bg-ink/5 px-2 py-0.5 text-[0.7rem] font-medium text-ink/70">
+                    <span className="rounded-full bg-ink/5 px-2 py-0.5 text-xs font-medium text-ink/70">
                       New
                     </span>
                   )}
                 </div>
 
                 {r.context && <p className="mt-3 text-xs font-medium text-muted">{r.context}</p>}
-                {r.text && <p className="mt-3 line-clamp-6 leading-relaxed text-ink/80">{r.text}</p>}
+                {r.text && <p className="mt-4 line-clamp-5 text-[15px] leading-7 text-ink/80">{r.text}</p>}
 
                 {r.scores && (
                   <p className="mt-auto pt-5 text-xs text-muted">
@@ -269,7 +269,7 @@ function CuratedReviews({ readUrl }: { readUrl: string }) {
         </li>
       </ul>
 
-      <p className="mx-auto max-w-7xl px-5 text-[13px] text-muted md:px-8">
+      <p className="mx-auto max-w-7xl px-5 text-sm text-muted md:px-8">
         Selected reviews from our Google Maps listing.{" "}
         <a href={readUrl} target="_blank" rel="noopener" className="font-medium text-ink underline-offset-4 hover:underline">
           Read every review on Google

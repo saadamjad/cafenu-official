@@ -37,7 +37,7 @@ export function About() {
   );
 
   return (
-    <section id="about" ref={root} aria-labelledby="about-title" className="relative overflow-hidden bg-cream py-16 sm:py-24 md:py-32 lg:flex lg:min-h-screen lg:items-center lg:py-0">
+    <section id="about" ref={root} aria-labelledby="about-title" className="relative overflow-hidden bg-cream py-20 md:py-28 lg:flex lg:min-h-screen lg:items-center lg:py-0">
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 md:gap-16 md:px-8 lg:grid-cols-2">
         <div className="relative mx-auto h-[400px] w-full max-w-lg sm:h-[520px] [perspective:1400px] lg:h-[640px]">
           <div data-layer="back" className="absolute left-[6%] top-[4%] h-[62%] w-[70%] overflow-hidden rounded-3xl shadow-xl">
@@ -52,19 +52,17 @@ export function About() {
         </div>
 
         <div>
-          <p className="eyebrow mb-5">About Cafe Nu</p>
+          <p className="eyebrow mb-4">About Cafe Nu</p>
           <h2 id="about-title" className="h2 text-ink">
             Freshness, flavour and comfort, <em className="text-gold-deep">all day long.</em>
           </h2>
-          <div className="mt-8 space-y-5 text-lg font-light leading-relaxed text-muted">
-            <p data-line>
-              Cafe Nu is a modern all-day dining destination in DHA Phase 2, Karachi. From handcrafted coffee and
-              in-house baked breads to wholesome breakfasts, pizzas, pastas and signature meals, everything is
-              thoughtfully prepared.
+          <div className="mt-6 space-y-4">
+            <p data-line className="lead">
+              An all-day cafe in DHA Phase 2, Karachi. Handcrafted coffee, bread baked in-house, and breakfasts,
+              pizzas and pastas made with care.
             </p>
-            <p data-line>
-              Pull up a teal velvet chair at an oak table, under arched pendant lights and greenery, and let our team
-              look after you. A warm room and quality service make every visit feel special.
+            <p data-line className="lead">
+              Teal velvet chairs, oak tables and arched pendant lights. Settle in, and let our team look after you.
             </p>
           </div>
           <ul data-line className="mt-10 grid grid-cols-3 gap-3 border-t border-line pt-8 sm:gap-4">

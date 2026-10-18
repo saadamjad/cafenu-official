@@ -12,10 +12,10 @@ export function Visit() {
   const hoursFor = (d: string) => site.hours.find((h) => h.dayCodes.includes(d));
 
   return (
-    <section id="visit" aria-labelledby="visit-title" className="relative overflow-hidden bg-gold py-16 sm:py-24 md:py-32 text-ink">
+    <section id="visit" aria-labelledby="visit-title" className="relative overflow-hidden bg-gold py-20 md:py-28 text-ink">
       <div className="mx-auto grid max-w-7xl gap-12 px-5 md:px-8 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
         <div>
-          <p className="eyebrow mb-5 !text-ink/80">Visit us</p>
+          <p className="eyebrow mb-4 !text-ink/80">Visit us</p>
           <h2 id="visit-title" className="h2">
             Come for coffee, <em className="font-medium">stay for brunch.</em>
           </h2>
@@ -26,7 +26,7 @@ export function Visit() {
           <div className="mt-10 grid gap-10 sm:grid-cols-2">
             {a && (
               <div>
-                <h3 className="text-xs font-semibold uppercase tracking-[0.22em]">Address</h3>
+                <h3 className="label !text-ink/80">Address</h3>
                 <address className="mt-3 not-italic leading-relaxed">
                   {site.name}
                   <br />
@@ -38,7 +38,7 @@ export function Visit() {
             )}
             {site.hours.length > 0 && (
               <div>
-                <h3 className="text-xs font-semibold uppercase tracking-[0.22em]">Opening hours</h3>
+                <h3 className="label !text-ink/80">Opening hours</h3>
                 <table className="mt-3 w-full text-left">
                   <caption className="sr-only">Opening hours by day</caption>
                   <tbody>
@@ -78,7 +78,7 @@ export function Visit() {
           </div>
 
           <div className="mt-10">
-            <h3 className="text-xs font-semibold uppercase tracking-[0.22em]">Follow Cafe Nu</h3>
+            <h3 className="label !text-ink/80">Follow Cafe Nu</h3>
             <SocialLinks className="mt-4" />
           </div>
         </div>

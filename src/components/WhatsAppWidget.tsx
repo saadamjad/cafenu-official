@@ -96,7 +96,7 @@ export function WhatsAppWidget() {
         </header>
 
         <div className="max-h-[min(28rem,calc(100dvh-16rem))] overflow-y-auto overscroll-contain px-4 pb-3 pt-3 md:pb-4 md:pt-4">
-          <p className="mb-3 inline-flex items-center gap-1.5 text-[0.7rem] font-medium uppercase tracking-[0.2em] text-cream/60">
+          <p className="mb-3 inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-[0.18em] text-cream/70">
             <span className="h-1.5 w-1.5 rounded-full bg-[#25D366]" aria-hidden="true" />
             Replies on WhatsApp
           </p>

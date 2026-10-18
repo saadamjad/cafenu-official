@@ -44,9 +44,8 @@ export function Hero() {
                 <Kinetic text="Modern Coffee Cafe & Restaurant" offset={8} />
               </span>
             </h1>
-            <p className="fade-up mt-6 max-w-lg text-lg font-light leading-relaxed text-cream/70" style={{ ["--d" as string]: "0.8s" }}>
-              Handcrafted coffee, in-house baked breads and all-day dining (breakfasts, pizzas, pastas and
-              signature plates) on Old Sunset Boulevard, DHA Phase 2, Karachi.
+            <p className="fade-up mt-6 max-w-md text-lg font-light leading-relaxed text-cream/75" style={{ ["--d" as string]: "0.8s" }}>
+              Handcrafted coffee, fresh-baked bread and all-day dining in DHA Phase 2, Karachi.
             </p>
             <div className="fade-up mt-10 flex flex-wrap gap-4" style={{ ["--d" as string]: "1s" }}>
               <MagneticButton href="#menu">View the menu</MagneticButton>

@@ -51,7 +51,7 @@ export function MobileActions() {
               href={href}
               {...(external ? { target: "_blank", rel: "noopener" } : {})}
               tabIndex={show ? 0 : -1}
-              className={`flex min-h-14 flex-col items-center justify-center gap-1 text-[0.7rem] font-medium tracking-wide active:bg-white/10 ${
+              className={`flex min-h-14 flex-col items-center justify-center gap-1 text-xs font-medium tracking-wide active:bg-white/10 ${
                 i === 0 ? "bg-gold text-ink" : ""
               }`}
             >

@@ -7,7 +7,7 @@ async function Year() {
   return <>{new Date().getFullYear()}</>;
 }
 
-const heading = "text-xs font-semibold uppercase tracking-[0.22em] text-gold";
+const heading = "label !text-gold";
 const link = "text-cream/75 transition-colors hover:text-gold";
 
 export function Footer() {
