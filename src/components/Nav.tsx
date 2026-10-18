@@ -49,18 +49,15 @@ export function Nav() {
           solid || open ? "bg-coal/80 shadow-[0_1px_0_rgb(207_170_118/0.15)] backdrop-blur-xl" : ""
         } text-cream`}
       >
-        <a href="#top" className="group flex items-center gap-3" aria-label="Cafe Nu home">
+        <a href="#top" className="group block" aria-label="Cafe Nu home">
           <Image
             src="/images/cafe-nu-logo.png"
-            alt=""
-            width={44}
-            height={44}
+            alt="Cafe Nu"
+            width={56}
+            height={56}
             priority
-            className="h-11 w-11 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:rotate-[20deg]"
+            className="h-14 w-14 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 group-hover:rotate-[12deg]"
           />
-          <span className="font-display text-2xl font-medium tracking-tight">
-            Cafe <span className="italic text-gold">Nu</span>
-          </span>
         </a>
         <nav aria-label="Main" className="hidden lg:block">
           <ul className="flex items-center gap-1">

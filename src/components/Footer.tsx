@@ -13,11 +13,16 @@ export function Footer() {
       <div className="tiles h-6 opacity-30" aria-hidden="true" />
       <div className="mx-auto flex max-w-7xl flex-col gap-10 px-4 py-16 sm:px-8 md:flex-row md:items-end md:justify-between">
         <div>
-          <Image src="/images/cafe-nu-logo.png" alt="Cafe Nu logo" width={96} height={96} className="mb-6 h-24 w-24 transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] hover:rotate-[20deg]" />
-          <p className="font-display text-[clamp(3rem,10vw,7rem)] font-medium leading-none">
-            Cafe <span className="italic text-gold">Nu</span>
-          </p>
-          <p className="mt-3 text-cream/70">{site.tagline}</p>
+          <a href="#top" aria-label="Cafe Nu, back to top" className="group inline-block">
+            <Image
+              src="/images/cafe-nu-logo.png"
+              alt="Cafe Nu"
+              width={160}
+              height={160}
+              className="h-32 w-32 transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:rotate-[12deg] sm:h-40 sm:w-40"
+            />
+          </a>
+          <p className="mt-5 text-cream/70">{site.tagline}</p>
           <SocialLinks variant="icon" className="mt-6" />
         </div>
         <nav aria-label="Footer">
