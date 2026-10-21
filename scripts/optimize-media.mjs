@@ -46,10 +46,12 @@ for (const [file, slug] of Object.entries(phonePhotos)) {
 }
 
 // Logo: mask the round badge onto a transparent background
-const LOGO = path.join(SRC, "828554365_122102163111491872_8835121402564258197_n.jpg");
+const LOGO = path.join(SRC, "cafe-nu-logo-badge.png");
 const size = 480;
 const circle = Buffer.from(`<svg width="${size}" height="${size}"><circle cx="${size / 2}" cy="${size / 2}" r="${size / 2 - 1}" fill="#fff"/></svg>`);
-await sharp(LOGO)
+// trim the white margin first so the circle mask follows the gold ring
+const trimmed = await sharp(LOGO).trim({ background: "#ffffff", threshold: 30 }).toBuffer();
+await sharp(trimmed)
   .resize(size, size, { fit: "cover" })
   .ensureAlpha()
   .composite([{ input: circle, blend: "dest-in" }])
