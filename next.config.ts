@@ -17,6 +17,16 @@ const nextConfig: NextConfig = {
         destination: "https://cafenuofficial.com/:path*",
         permanent: true,
       },
+      // Old logo/icon filenames (renamed with the new badge) still referenced by caches and installed apps
+      ...[
+        ["/images/cafe-nu-logo.png", "/images/cafe-nu-badge.png"],
+        ["/images/cafe-nu-logo-168.png", "/images/cafe-nu-badge-168.png"],
+        ["/icon-192.png", "/cafe-nu-icon-192.png"],
+        ["/icon-512.png", "/cafe-nu-icon-512.png"],
+        ["/icon-maskable-512.png", "/cafe-nu-icon-maskable-512.png"],
+        ["/icon.png", "/cafe-nu-icon-192.png"],
+        ["/apple-icon.png", "/cafe-nu-apple-icon.png"],
+      ].map(([source, destination]) => ({ source, destination, permanent: true })),
     ];
   },
 };
