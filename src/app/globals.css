@@ -187,20 +187,20 @@ body {
   display: none;
   place-items: center;
   background: var(--coal);
-  animation: preloader-out 1s var(--ease-in-out) 1.2s forwards;
+  animation: preloader-out 0.6s var(--ease-in-out) 0.6s forwards;
   pointer-events: none;
 }
 @media (min-width: 768px) {
-  :root { --intro: 1.25s; }
+  :root { --intro: 0.6s; }
   .preloader { display: grid; }
 }
 .preloader__logo {
-  animation: logo-in 1.1s var(--ease-out) both;
+  animation: logo-in 0.6s var(--ease-out) both;
 }
 .preloader__ring {
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
-  animation: draw 1.2s var(--ease-in-out) 0.1s forwards;
+  animation: draw 0.6s var(--ease-in-out) forwards;
 }
 @keyframes logo-in {
   from { opacity: 0; transform: scale(0.82) rotate(-12deg); filter: blur(6px); }

@@ -44,16 +44,16 @@ export function Hero() {
                 <Kinetic text="Modern Coffee Cafe & Restaurant" offset={8} />
               </span>
             </h1>
-            <p className="fade-up mt-6 max-w-md text-lg font-light leading-relaxed text-cream/75" style={{ ["--d" as string]: "0.8s" }}>
+            <p className="fade-up mt-6 max-w-md text-lg font-light leading-relaxed text-cream/75" style={{ ["--d" as string]: "0.3s" }}>
               Handcrafted coffee, fresh-baked bread and all-day dining in DHA Phase 2, Karachi.
             </p>
-            <div className="fade-up mt-10 flex flex-wrap gap-4" style={{ ["--d" as string]: "1s" }}>
+            <div className="fade-up mt-10 flex flex-wrap gap-4" style={{ ["--d" as string]: "0.4s" }}>
               <MagneticButton href="/menu">View the menu</MagneticButton>
               <MagneticButton href={site.directionsUrl} variant="ghost" external>
                 <DirectionsIcon /> Get directions
               </MagneticButton>
             </div>
-            <p className="fade-up mt-8 text-sm text-cream/75" style={{ ["--d" as string]: "1.2s" }}>
+            <p className="fade-up mt-8 text-sm text-cream/75" style={{ ["--d" as string]: "0.5s" }}>
               <OpenStatus />
             </p>
           </div>
