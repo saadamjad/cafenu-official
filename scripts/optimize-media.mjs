@@ -56,7 +56,7 @@ await sharp(trimmed)
   .ensureAlpha()
   .composite([{ input: circle, blend: "dest-in" }])
   .png({ compressionLevel: 9 })
-  .toFile(`${OUT}/cafe-nu-logo.png`);
+  .toFile(`${OUT}/cafe-nu-badge.png`);
 console.log("✓ logo");
 
 // Open Graph card (1200x630) from the breakfast hero shot

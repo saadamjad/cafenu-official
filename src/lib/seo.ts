@@ -20,6 +20,10 @@ export function buildMetadata({ title = pageTitle, description = pageDescription
     title,
     description,
     applicationName: site.name,
+    icons: {
+      icon: [{ url: "/cafe-nu-icon-192.png", sizes: "192x192", type: "image/png" }],
+      apple: [{ url: "/cafe-nu-apple-icon.png", sizes: "180x180", type: "image/png" }],
+    },
     alternates: { canonical: path },
     robots: { index: true, follow: true, "max-image-preview": "large" } as Metadata["robots"],
     openGraph: {

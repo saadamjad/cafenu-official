@@ -21,7 +21,7 @@ export function Footer() {
         <div>
           <Link href="/#top" aria-label="Cafe Nu, back to top" className="group inline-block">
             <Image
-              src="/images/cafe-nu-logo.png"
+              src="/images/cafe-nu-badge.png"
               alt="Cafe Nu"
               width={112}
               height={112}

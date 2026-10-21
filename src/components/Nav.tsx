@@ -74,7 +74,7 @@ export function Nav() {
       <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between gap-6 px-5 md:px-8">
         <a href={to("#top")} className="group block shrink-0" aria-label="Cafe Nu home">
           <Image
-            src="/images/cafe-nu-logo-168.png"
+            src="/images/cafe-nu-badge-168.png"
             alt="Cafe Nu"
             width={56}
             height={56}

@@ -77,7 +77,7 @@ export function WhatsAppWidget() {
         }`}
       >
         <header className="flex items-center gap-3 border-b border-gold/15 px-4 py-2.5 md:py-3.5">
-          <Image src="/images/cafe-nu-logo-168.png" alt="" width={44} height={44} unoptimized className="h-9 w-9 shrink-0 md:h-11 md:w-11" />
+          <Image src="/images/cafe-nu-badge-168.png" alt="" width={44} height={44} unoptimized className="h-9 w-9 shrink-0 md:h-11 md:w-11" />
           <div className="min-w-0 flex-1">
             <h2 id="wa-title" className="font-display text-base leading-tight md:text-lg">
               {site.name}

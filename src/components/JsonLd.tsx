@@ -22,7 +22,7 @@ export function SiteJsonLd() {
     name: site.name,
     url: site.url,
     description: site.description,
-    logo: abs("/images/cafe-nu-logo.png"),
+    logo: abs("/images/cafe-nu-badge.png"),
     image: [
       abs("/images/cafe-nu-all-day-breakfast-latte.jpg"),
       abs("/images/cafe-nu-club-sandwich.jpg"),

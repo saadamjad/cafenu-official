@@ -73,7 +73,7 @@ export function Hero() {
               <div className="absolute inset-0 bg-gradient-to-t from-coal/70 via-transparent to-transparent" />
             </div>
             <div className="float-slow absolute -left-4 -top-4 h-24 w-24 sm:-left-8 sm:-top-6 sm:h-28 sm:w-28">
-              <Image src="/images/cafe-nu-logo.png" alt="Cafe Nu logo" fill sizes="7rem" className="drop-shadow-[0_12px_24px_rgba(0,0,0,0.5)]" />
+              <Image src="/images/cafe-nu-badge.png" alt="Cafe Nu logo" fill sizes="7rem" className="drop-shadow-[0_12px_24px_rgba(0,0,0,0.5)]" />
             </div>
             <p className="absolute -bottom-5 right-6 rounded-full bg-cream px-5 py-2 text-sm font-medium text-ink shadow-lg">
               All-day breakfast · <span className="font-semibold">Rs 1,450</span>

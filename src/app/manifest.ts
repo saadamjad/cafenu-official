@@ -10,9 +10,9 @@ export default function manifest(): MetadataRoute.Manifest {
     background_color: "#f7f3ec",
     theme_color: "#1f1f1f",
     icons: [
-      { src: "/icon-192.png", sizes: "192x192", type: "image/png" },
-      { src: "/icon-512.png", sizes: "512x512", type: "image/png" },
-      { src: "/icon-maskable-512.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
+      { src: "/cafe-nu-icon-192.png", sizes: "192x192", type: "image/png" },
+      { src: "/cafe-nu-icon-512.png", sizes: "512x512", type: "image/png" },
+      { src: "/cafe-nu-icon-maskable-512.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
     ],
   };
 }

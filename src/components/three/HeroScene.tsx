@@ -46,7 +46,7 @@ function useCupTexture() {
       g.drawImage(logo, 512 - 135, 256 - 150, 270, 300);
       tex.needsUpdate = true;
     };
-    logo.src = "/images/cafe-nu-logo.png";
+    logo.src = "/images/cafe-nu-badge.png";
     return tex;
   }, []);
 }
