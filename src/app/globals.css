@@ -257,31 +257,6 @@ body {
   translate: 0 -0.3em;
 }
 
-/* Flip cards */
-.flip { perspective: 1100px; }
-.flip__inner {
-  position: relative;
-  height: 100%;
-  transition: transform 1s var(--ease-out);
-  transform-style: preserve-3d;
-}
-.flip[data-flipped="true"] .flip__inner { transform: rotateY(180deg); }
-@media (hover: hover) {
-  .flip:hover .flip__inner { transform: rotateY(180deg); }
-}
-.flip__face {
-  position: absolute;
-  inset: 0;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-.flip__back { transform: rotateY(180deg); }
-.flip__liquid {
-  transition: height 1.1s var(--ease-out);
-}
-.flip:hover .flip__liquid,
-.flip[data-flipped="true"] .flip__liquid { height: 78%; }
-
 /* Phones: the bottom quick-actions bar already offers WhatsApp, so the floating launcher steps aside. */
 .wa-widget {
   transition: opacity 0.4s var(--ease-out), visibility 0.4s;

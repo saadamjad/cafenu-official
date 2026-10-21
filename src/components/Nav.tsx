@@ -9,7 +9,6 @@ import { SocialLinks } from "@/components/SocialLinks";
 const links = [
   { href: "#about", label: "About" },
   { href: "/menu", label: "Menu" },
-  { href: "#drinks", label: "Coffee & Matcha" },
   { href: "#reviews", label: "Reviews" },
   { href: "#gallery", label: "Gallery" },
   { href: "#visit", label: "Visit" },

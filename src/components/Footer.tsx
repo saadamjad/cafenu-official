@@ -80,7 +80,7 @@ export function Footer() {
           <ul className="mt-3">
             <li><Link className={link} href="/#about">About</Link></li>
             <li><Link className={link} href="/menu">Menu</Link></li>
-            <li><Link className={link} href="/#drinks">Coffee &amp; matcha</Link></li>
+            <li><Link className={link} href="/menu#menu-hot-coffee">Coffee &amp; matcha</Link></li>
             <li><Link className={link} href="/#reviews">Reviews</Link></li>
             <li><Link className={link} href="/#gallery">Gallery</Link></li>
             <li><a className={link} href="/cafe-nu-menu.pdf" download>Download PDF menu</a></li>
