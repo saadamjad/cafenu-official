@@ -1,6 +1,6 @@
 # Cafe Nu: cafenuofficial.com
 
-Single-page, animated website for **Cafe Nu**, a modern coffee cafe & restaurant.
+Animated website for **Cafe Nu**, a modern coffee cafe & restaurant.
 Next.js 16 (App Router, static prerender) · Tailwind CSS 4 · GSAP ScrollTrigger · Lenis · React Three Fiber.
 
 ```bash
@@ -37,10 +37,16 @@ the Places "Enterprise + Atmosphere" tier, so check current pricing in Google Cl
 
 ## Page structure (`/`)
 
-Preloader (desktop only) → Hero with 3D cup + beans (WebGL, desktop/tablet only, lazy-loaded) → velocity marquee →
-About (pinned 3-layer parallax) → Signature plates (pinned horizontal 3D carousel) → Full menu (scroll-spy pills,
-drawn leaders, PDF download) → Coffee & matcha flip cards → Gallery + reel in a 3D phone → Visit → Footer.
+Preloader (desktop only) → Hero with 3D cup + beans (WebGL, desktop/tablet only, lazy-loaded) → info bar →
+About (pinned 3-layer parallax) → Signature plates (pinned horizontal 3D carousel) → Menu teaser (links to `/menu`) →
+Google reviews → Gallery + reel in a 3D phone → Visit → Footer.
 All motion is disabled under `prefers-reduced-motion`; phones get a lighter version without WebGL or a preloader.
+
+`/menu` is the full priced menu (scroll-spy category pills, PDF download) with its own metadata and Menu JSON-LD.
+SEO audit, metadata inventory and post-deploy checklist: [`docs/SEO_AUDIT.md`](docs/SEO_AUDIT.md).
+
+**Logo / icons:** source is `resources/cafe-nu-logo-badge.png`. `npm run media` then `npm run icons`. When the logo
+changes, give the output files new names (the host and browsers cache public files for a year).
 
 ## Media
 
