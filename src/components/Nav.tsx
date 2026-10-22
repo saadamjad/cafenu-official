@@ -68,7 +68,7 @@ export function Nav() {
     <header
       className={`fixed inset-x-0 top-0 z-50 text-cream transition-[transform,background-color,box-shadow] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
         hidden && !open ? "-translate-y-full" : ""
-      } ${solid || open ? "bg-coal/85 shadow-[0_1px_0_rgb(207_170_118/0.15)] backdrop-blur-xl" : ""}`}
+      } ${solid || open || !home ? "bg-coal/85 shadow-[0_1px_0_rgb(207_170_118/0.15)] backdrop-blur-xl" : ""}`}
     >
       <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between gap-6 px-5 md:px-8">
         <a href={to("#top")} className="group block shrink-0" aria-label="Cafe Nu home">
@@ -77,7 +77,7 @@ export function Nav() {
             alt="Cafe Nu"
             width={56}
             height={56}
-            priority
+            preload
             unoptimized
             className="h-14 w-14 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:rotate-[12deg] group-hover:scale-105"
           />

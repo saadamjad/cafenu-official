@@ -66,7 +66,7 @@ export function Hero() {
                 alt="Cafe Nu All Day Breakfast with fluffy eggs, halloumi and sausages beside a latte with latte art"
                 fill
                 quality={85}
-                priority
+                preload
                 sizes="(min-width: 1024px) 28rem, 90vw"
                 className="object-cover object-[35%_50%]"
               />
