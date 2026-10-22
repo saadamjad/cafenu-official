@@ -79,7 +79,21 @@ After the fixes, on a local production build (`npm start`). **Not directly compa
 | `/menu` | mobile | 93 | 100 | 3.3 s | 0 |
 | `/menu` | desktop | n/a | 100 | n/a | 0 |
 
-For a fair before/after comparison, see §8 (live re-run after deploy).
+**Live, after deploy (2026-10-22, same Lighthouse settings as the baseline):**
+
+| Page | Device | Perf | A11y | BP | SEO | LCP | CLS |
+|---|---|---|---|---|---|---|---|
+| `/` | desktop | 95 | 100 | 100 | 100 | 1.0 s | 0 |
+| `/menu` | desktop | 93 | 100 | 100 | 100 | 1.4 s | 0 |
+| `/` | mobile, 4 runs | 75–88 | 100 | 100 | 100 | 3.8–5.7 s | 0 |
+| `/menu` | mobile, 4 runs | 79–86 | 100 | 100 | 100 | 3.6–4.6 s | 0 |
+
+**How to read the mobile numbers:** Lighthouse's mobile LCP is a *simulated* estimate. In the same runs, the
+*observed* LCP was 1.3–2.7 s, but that used an unthrottled connection, so it is optimistic. The simulated value varies ±1 s from
+run to run and is driven mainly by the ~270 KB of JavaScript (Next/React plus GSAP), which the model assumes must load before the
+first text paint. **Conclusion:** accessibility on `/menu` desktop went from 96 to 100 and CLS stays at 0. The mobile LCP change can't be
+told apart from run-to-run noise in lab tests. Use Search Console field data (75th percentile) to judge it. The next real lever is
+less JavaScript on first load, e.g. lazy-loading GSAP/Lenis for below-the-fold effects. That's a larger change and wasn't done here.
 
 **What's left in mobile LCP on `/`:** TTFB from Hostinger is about 0.9–1.0 s, and the hero image waits for fonts and JS chunks on a throttled 4G connection. The hero image itself is only about 25 KB (AVIF, 750 w).
 
