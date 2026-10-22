@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap, useGSAP, prefersReducedMotion } from "@/lib/gsap";
 import { formatPrice, menu } from "@/content/menu";
+import { site } from "@/content/site";
 import { ChevronIcon } from "@/components/Icons";
 
 const groups = [
@@ -81,7 +82,7 @@ export function MenuBoard() {
             <p className="lead mt-5">From breakfast to dessert. All prices in Pakistani rupees.</p>
           </div>
           <a
-            href="/cafe-nu-menu.pdf"
+            href={site.menuPdf}
             download
             className="inline-flex min-h-12 items-center gap-2 rounded-full border border-ink/40 px-6 py-3 font-medium text-ink transition hover:border-ink hover:bg-ink hover:text-cream"
           >

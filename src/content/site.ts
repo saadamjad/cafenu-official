@@ -23,7 +23,9 @@ export const site = {
   currency: "PKR",
   timeZone: "Asia/Karachi",
   /** Last real content change (menu, prices, hours). Used as sitemap lastmod, so bump it by hand. */
-  contentUpdated: "2026-10-19",
+  contentUpdated: "2026-10-22",
+  /** Downloadable menu, built from menu.ts by `npm run menu-pdf` (new dated file each time). */
+  menuPdf: "/cafe-nu-menu-2026-10-22.pdf",
 
   city: "Karachi" as string | null,
   address: address as null | typeof address,

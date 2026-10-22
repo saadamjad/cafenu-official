@@ -1,5 +1,6 @@
 import { MagneticButton } from "@/components/MagneticButton";
 import { menu } from "@/content/menu";
+import { site } from "@/content/site";
 
 const groups = [
   { label: "Food", items: menu.filter((c) => c.kind === "food") },
@@ -25,7 +26,7 @@ export function MenuTeaser() {
               View full menu →
             </MagneticButton>
             <a
-              href="/cafe-nu-menu.pdf"
+              href={site.menuPdf}
               download
               className="inline-flex min-h-12 items-center rounded-full border border-ink/40 px-6 font-medium text-ink transition hover:border-ink hover:bg-ink hover:text-cream"
             >

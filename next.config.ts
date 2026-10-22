@@ -40,6 +40,7 @@ const nextConfig: NextConfig = {
         ["/icon.png", "/cafe-nu-icon-192.png"],
         ["/apple-icon.png", "/cafe-nu-apple-icon.png"],
         ["/video/cafe-nu-reel.mp4", "/video/cafe-nu-reel-720.mp4"],
+        ["/cafe-nu-menu.pdf", "/cafe-nu-menu-2026-10-22.pdf"],
       ].map(([source, destination]) => ({ source, destination, permanent: true })),
     ];
   },

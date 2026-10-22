@@ -9,6 +9,7 @@ npm run dev          # http://localhost:3000
 npm run build && npm start
 npm run lint && npm run typecheck
 npm run media        # re-generate web images from /resources (originals, not in git)
+npm run menu-pdf     # rebuild the downloadable PDF menu from src/content/menu.ts, then set site.menuPdf
 ```
 
 ## Where to edit content
@@ -16,7 +17,7 @@ npm run media        # re-generate web images from /resources (originals, not in
 | What | File |
 |---|---|
 | Address, phone, WhatsApp, hours, socials, city, Maps links | `src/content/site.ts` |
-| Menu items, prices, descriptions, dish photos | `src/content/menu.ts` |
+| Menu items, prices, descriptions, dish photos | `src/content/menu.ts` (then `npm run menu-pdf` for the PDF) |
 | Title / description / Open Graph | `src/lib/seo.ts` |
 | Structured data (LocalBusiness + Menu) | `src/components/JsonLd.tsx` |
 

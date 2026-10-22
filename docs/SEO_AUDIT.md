@@ -53,8 +53,8 @@ Status codes: ✅ fixed and verified locally, 🌐 verified on production, ⏳ o
 | B1 | P2 | Brand | New "CAFE" badge logo. Hostinger and browsers kept old copies because the filenames stayed the same | New filenames (`cafe-nu-badge*`, `cafe-nu-icon-*`) plus 308s from the old URLs | 🌐 |
 | C1 | P3 | Content | Drinks flip-card section removed at the owner's request. Links now point to `/menu#menu-hot-coffee` | | 🌐 |
 | I1 | P3 | Images | Signature dish alt text was only the dish name | `"<dish> at Cafe Nu"` | 🌐 |
-| O1 | P2 | Brand | The **PDF menu** still has the old lowercase "Café" logo and the old spellings (Break Fast, Ceaser, Crossiant) | Needs a re-export from the designer | 👤 |
-| O2 | P3 | UX | The WhatsApp panel auto-opens once per session on desktop (never on phones) and covers part of the menu | Kept: it was a deliberate earlier decision. Consider disabling it on `/menu`. | ⏳ |
+| O1 | P2 | Brand | The **PDF menu** had the old lowercase "Café" logo and old spellings (Break Fast, Ceaser, Crossiant) | New PDF built from `menu.ts` by `npm run menu-pdf`: new logo, same spellings and prices as `/menu`. Saved as `cafe-nu-menu-2026-10-22.pdf`; the old URL redirects to it | ✅ |
+| O2 | P3 | UX | The WhatsApp panel auto-opened on desktop and covered menu prices on `/menu` | No auto-open on `/menu` (still opens on demand; home is unchanged) | ✅ |
 | O3 | P3 | Reviews | `/api/reviews` returns `null` in production (no API key), so the section shows the hand-copied Google reviews (4.9 ★, 8 reviews) from `src/content/reviews.ts`. Keep them in sync by hand. | | 👤 |
 | O4 | P3 | Security | No HSTS header. It wasn't added because it is hard to undo if HTTPS ever breaks. | Add `Strict-Transport-Security: max-age=31536000` after a month of stable HTTPS | ⏳ |
 
@@ -135,7 +135,6 @@ There's no keyword tool access, so this table has **no search volumes**. The the
 | Proposed | Why | Needs from the owner | Priority |
 |---|---|---|---|
 | Short FAQ on `/` (booking, delivery and apps, parking, payment methods, family or work seating, Wi-Fi) | These are real visitor questions; the WhatsApp quick replies already include "Can I book a table?" | The true answer to each one | P2 |
-| Updated PDF menu (new logo, corrected spellings) | Brand consistency | Designer export | P2 |
 | Seasonal or special menu notes on `/menu` | Fresh, useful content | Real specials | P3 |
 | Dish pages for top sellers | Only if Search Console shows dish-level demand | Photos and descriptions | P3 |
 

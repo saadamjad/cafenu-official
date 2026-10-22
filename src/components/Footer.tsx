@@ -83,7 +83,7 @@ export function Footer() {
             <li><Link className={link} href="/menu#menu-hot-coffee">Coffee &amp; matcha</Link></li>
             <li><Link className={link} href="/#reviews">Reviews</Link></li>
             <li><Link className={link} href="/#gallery">Gallery</Link></li>
-            <li><a className={link} href="/cafe-nu-menu.pdf" download>Download PDF menu</a></li>
+            <li><a className={link} href={site.menuPdf} download>Download PDF menu</a></li>
           </ul>
         </nav>
       </div>

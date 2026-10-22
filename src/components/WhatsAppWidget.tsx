@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { site, whatsappChatHref, whatsappHref, whatsappMessages } from "@/content/site";
 import { CloseIcon, WhatsAppIcon } from "@/components/Icons";
@@ -24,19 +25,21 @@ function markSeen() {
 // Floating WhatsApp chat: opens once per session on first visit, then only on demand.
 export function WhatsAppWidget() {
   const [open, setOpen] = useState(false);
+  // On /menu the panel would cover prices people came to read: open on demand only.
+  const autoOpen = usePathname() !== "/menu";
   const toggleRef = useRef<HTMLButtonElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     // Phones: never auto-open. A panel popping over the page on a small screen is intrusive.
-    if (wasSeen() || !window.matchMedia("(min-width: 768px)").matches) return;
+    if (!autoOpen || wasSeen() || !window.matchMedia("(min-width: 768px)").matches) return;
     const t = window.setTimeout(() => {
       if (wasSeen()) return; // visitor already opened/closed it manually
       markSeen();
       setOpen(true); // no focus move: never pull keyboard users away from what they're doing
     }, AUTO_OPEN_DELAY);
     return () => window.clearTimeout(t);
-  }, []);
+  }, [autoOpen]);
 
   const close = useCallback((restoreFocus: boolean) => {
     markSeen();

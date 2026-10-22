@@ -9,7 +9,8 @@
     "lint": "eslint",
     "media": "node scripts/optimize-media.mjs",
     "typecheck": "tsc --noEmit",
-    "icons": "node scripts/generate-icons.mjs"
+    "icons": "node scripts/generate-icons.mjs",
+    "menu-pdf": "node scripts/generate-menu-pdf.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
