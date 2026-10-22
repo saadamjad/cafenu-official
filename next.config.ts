@@ -39,6 +39,7 @@ const nextConfig: NextConfig = {
         ["/icon-maskable-512.png", "/cafe-nu-icon-maskable-512.png"],
         ["/icon.png", "/cafe-nu-icon-192.png"],
         ["/apple-icon.png", "/cafe-nu-apple-icon.png"],
+        ["/video/cafe-nu-reel.mp4", "/video/cafe-nu-reel-720.mp4"],
       ].map(([source, destination]) => ({ source, destination, permanent: true })),
     ];
   },

@@ -51,8 +51,9 @@ changes, give the output files new names (the host and browsers cache public fil
 ## Media
 
 `scripts/optimize-media.mjs` turns the 14–23 MB camera originals into 2000px JPEG masters in `public/images/`;
-`next/image` serves AVIF/WebP at quality 85 and responsive sizes up to 3x pixel density. The reel (`public/video/cafe-nu-reel.mp4`, 720×1280, ~8 MB) only loads when scrolled into view. For a smaller file, re-encode with ffmpeg, e.g.
-`ffmpeg -i IMG_9949.MOV -vf scale=720:-2 -c:v libx264 -crf 28 -preset slow -an -movflags +faststart cafe-nu-reel.mp4`.
+`next/image` serves AVIF/WebP at quality 85 and responsive sizes up to 3x pixel density. The reel (`public/video/cafe-nu-reel-720.mp4`, 720×1280, ~2 MB, silent) only loads when scrolled into view. It was encoded with
+`ffmpeg -i IMG_9949.MOV -vf scale=720:-2 -c:v libx264 -crf 28 -preset slow -pix_fmt yuv420p -an -movflags +faststart cafe-nu-reel-720.mp4`
+(use a new filename for any re-encode; the host caches public files for a year).
 `resources/IIV01305.jpg (1).jpeg` is a byte-identical duplicate and is not used.
 
 ## Menu spelling fixes (please verify)

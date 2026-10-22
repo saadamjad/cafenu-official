@@ -43,7 +43,7 @@ Status codes: ✅ fixed and verified locally, 🌐 verified on production, ⏳ o
 | P1 | P1 | Perf | `/menu` mobile LCP text painted 3.9 s late: GSAP hid categories already on screen until JS ran (Lighthouse LCP breakdown) | Only below-the-fold categories animate (`MenuBoard.tsx`) | ✅ |
 | P2 | P2 | Perf | The 130 KB preloader logo was preloaded on phones, where the preloader is hidden, competing with the hero image | `<picture>`: phones reuse the 24 KB header logo (`Preloader.tsx`) | ✅ |
 | P3 | P2 | Perf | Desktop preloader held the page for 2.2 s and the hero buttons appeared at 2.25 s | Preloader 1.2 s, buttons from 1.0 s | 🌐 |
-| P4 | P2 | Perf | Reel video is 7.6 MB | Re-encoded under a new filename (see §8) | see §8 |
+| P4 | P2 | Perf | Reel video was 7.6 MB | Re-encoded H.264 CRF 28, silent (it's always muted): **2.1 MB (−72%)**, same 720×1280, frames visually identical; new filename `cafe-nu-reel-720.mp4`, old URL 308s | ✅ |
 | S4 | P2 | Crawl | Sitemap had no lastmod, and `/menu` listed no images | Fixed `contentUpdated` lastmod plus the six dish images shown on `/menu` | 🌐 |
 | S5 | P2 | Crawl | `/api/reviews` was crawlable. With an API key set, each hit is a billed Places call | `Disallow: /api/` | ✅ |
 | X1 | P2 | Security | No `X-Content-Type-Options`, `Referrer-Policy`, frame protection or `Permissions-Policy` (curl -I) | Added in `next.config.ts` `headers()` | ✅ |

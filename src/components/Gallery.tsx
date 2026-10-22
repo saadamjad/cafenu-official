@@ -80,7 +80,7 @@ export function Gallery() {
               <video
                 ref={video}
                 className="aspect-[9/16] w-full rounded-[2rem] object-cover"
-                src="/video/cafe-nu-reel.mp4"
+                src="/video/cafe-nu-reel-720.mp4"
                 poster="/video/cafe-nu-reel-poster.jpg"
                 muted
                 loop
