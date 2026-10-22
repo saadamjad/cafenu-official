@@ -58,9 +58,13 @@ export function MenuBoard() {
   useGSAP(
     () => {
       if (prefersReducedMotion()) return;
-      gsap.utils.toArray<HTMLElement>("[data-cat]").forEach((cat) =>
-        gsap.from(cat, { opacity: 0, y: 24, duration: 0.9, ease: "expo.out", scrollTrigger: { trigger: cat, start: "top 88%" } }),
-      );
+      // only categories below the fold animate: hiding visible text until JS runs delays the first paint
+      gsap.utils
+        .toArray<HTMLElement>("[data-cat]")
+        .filter((cat) => cat.getBoundingClientRect().top > window.innerHeight)
+        .forEach((cat) =>
+          gsap.from(cat, { opacity: 0, y: 24, duration: 0.9, ease: "expo.out", scrollTrigger: { trigger: cat, start: "top 88%" } }),
+        );
     },
     { scope: root },
   );
