@@ -98,9 +98,9 @@ export function Gallery() {
               <button
                 type="button"
                 onClick={() => openPhoto(i)}
-                aria-label={`View larger: ${p.alt}`}
                 className="group absolute inset-0 block h-full w-full cursor-zoom-in focus-visible:rounded-2xl!"
               >
+                <span className="sr-only">View larger: </span>
                 <Image src={p.src} alt={p.alt} fill quality={85} sizes="(min-width: 1024px) 26rem, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
                 <span className="absolute bottom-2 right-2 rounded-full bg-coal/70 px-2.5 py-1 text-xs sm:bottom-3 sm:right-3 sm:px-3 font-medium text-cream backdrop-blur-sm" aria-hidden="true">
                   Tap to enlarge
