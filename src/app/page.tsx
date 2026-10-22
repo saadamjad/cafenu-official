@@ -7,6 +7,7 @@ import { Signatures } from "@/components/Signatures";
 import { MenuTeaser } from "@/components/MenuTeaser";
 import { Reviews } from "@/components/Reviews";
 import { Gallery } from "@/components/Gallery";
+import { Faq } from "@/components/Faq";
 import { Visit } from "@/components/Visit";
 import { Footer } from "@/components/Footer";
 import { MobileActions } from "@/components/MobileActions";
@@ -26,6 +27,7 @@ export default function Home() {
         <MenuTeaser />
         <Reviews />
         <Gallery />
+        <Faq />
         <Visit />
       </main>
       <Footer />

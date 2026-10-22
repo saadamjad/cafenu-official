@@ -128,13 +128,13 @@ There's no keyword tool access, so this table has **no search volumes**. The the
 | "cafe in dha phase 2", "cafe near sunset boulevard", "breakfast dha karachi" | Local discovery | `/` | Address in hero, Visit, footer, schema | Mostly decided by the Google Business Profile (reviews, photos, categories), not by the website |
 | "all day breakfast karachi", "club sandwich dha", "tuscan chicken pasta karachi", "iced matcha karachi" | Dish / product | `/menu` | Dishes listed with descriptions and prices | Dish pages only if Search Console shows impressions for them |
 | "cafe nu timings", "is cafe nu open now" | Practical | `/` | Hours in Visit, live open status, schema | none |
-| "cafe nu booking", "cafe nu delivery", "parking" | Practical | n/a | **Unknown**. The site doesn't say. | Owner must confirm (see §7) |
+| "cafe nu booking", "cafe nu delivery", "parking" | Practical | `/#faq` | Answered in the FAQ | none |
 
 ## 7. Content plan (only with verified facts)
 
 | Proposed | Why | Needs from the owner | Priority |
 |---|---|---|---|
-| Short FAQ on `/` (booking, delivery and apps, parking, payment methods, family or work seating, Wi-Fi) | These are real visitor questions; the WhatsApp quick replies already include "Can I book a table?" | The true answer to each one | P2 |
+| ✅ **Done 2026-10-22:** FAQ on `/` (`src/components/Faq.tsx`, `#faq`, linked in the footer): booking (WhatsApp or call), dine-in/takeaway/delivery, hours, address, parking (building and Old Sunset Blvd), cards accepted, menu and PDF. Answers confirmed by the owner. Plain HTML, no FAQ schema. | Real visitor questions | Owner to confirm the parking wording; add delivery apps or areas if any | done |
 | Seasonal or special menu notes on `/menu` | Fresh, useful content | Real specials | P3 |
 | Dish pages for top sellers | Only if Search Console shows dish-level demand | Photos and descriptions | P3 |
 
